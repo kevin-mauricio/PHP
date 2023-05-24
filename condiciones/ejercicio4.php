@@ -1,37 +1,25 @@
 <?php
     if (isset($_REQUEST['boton'])) {
-        $horas = $_REQUEST['horas'];
-        $turno = $_REQUEST['turnos'];
-        $salario = 0;
+        $valor = $_REQUEST['valor'];
+        $descuento = 0;
 
-        if ($turno == 'dia') {
-            $salario = $horas * 50000;
-        } else if ($turno == 'noche') {
-            $salario = $horas * 80000;
+        if ($valor > 100000) {
+            $descuento = $valor * 0.2;
+            $total = $valor - $descuento;
+            $parrafo = "Valor de la compra = ".$valor.'<br>'."Descuento = ".$descuento.'<br>'."Total = ".$total;
+        } else {
+            $parrafo = "Valor de la compra = ".$valor.'<br>'."Descuento = ".$descuento.'<br>'."Total = ".$valor;
         }
-
-        if ($salario > 800000) {
-            $salario -= ($salario * 0.1);
-        }
-
-        if (isset($_REQUEST['domingoFestivo'])) {
-            $salario += $salario * 0.15;
-        }
-
-        $parrafo = "El salario del empleado es: ".$salario;
-
     } else {
-        $parrafo = "Ingrese los valores";
+        $parrafo = "Ingrese el valor de la compra";
     }
 ?>
-
-
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Turnos</title>
+    <title>Descuento</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="css/styles.css">
   </head>
@@ -55,24 +43,13 @@
       </nav>
     </header>
     <main class="container">
-        <h1>Turnos</h1>
-        <p>Calcular el salario según la cantidad de horas y el turno</p>
+        <h1>Descuento del 20%</h1>
+        <p>Calcular descuento del 20% para comprar mayores a $100.000</p>
         <form class="col-3 m-3" method="post">
             <div class="mb-3">
-                <input type="number" placeholder="cantidad de horas" class="form-control" name="horas">
+                <input type="number" placeholder="Valor de la compra" class="form-control" name="valor">
             </div>
-            <select class="form-select" name="turnos">
-                <option selected>Seleccionar turno</option>
-                <option value="dia">Turno día</option>
-                <option value="noche">Turno noche</option>
-            </select>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" name="domingoFestivo" id="flexCheckDefault">
-              <label class="form-check-label" for="flexCheckDefault">
-                ¿Domingo o festivo?
-              </label>
-            </div>
-            <button type="submit" class="btn btn-primary m-2" name= "boton">Calcular</button>
+            <button type="submit" class="btn btn-primary m-2" name= "boton">Comprar</button>
             <p name="parrafo"><?php echo $parrafo; ?></p>
         </form>
     </main>

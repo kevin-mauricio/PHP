@@ -4,14 +4,44 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Condiciones - PHP</title>
+    <link rel="stylesheet" href="css/styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-  </head>
-  <body>
-    <h1>Ejercicio condicionales</h1>
-    <ul>
-        <li><a href="ejercicio1.php">Ejercicio 1</a></li>
-        <li><a href="ejercicio2.php">Ejercicio 2</a></li>
-    </ul>
+</head>
+  <body class="container-fluid">
+    <header>
+      <nav class="navbar navbar-expand-lg bg-dark">
+        <div class="p-1">
+              <a class="navbar-brand text-white">
+              <img src="img/logo_sena.png" alt="Logo" width="60" class="d-inline-block align-text-center">
+              ADSO
+              </a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active text-white" aria-current="page" href="index.php">Inicio</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="container">
+      <h1 class="p-2">Ejercicios condicionales</h1>
+      <div class="list-group col-2">
+        <a href="ejercicio1.php" class="list-group-item list-group-item-action" aria-current="true">1. Comisiones </a>
+        <a href="ejercicio2.php" class="list-group-item list-group-item-action" aria-current="true">2. Turnos</a>
+        <a href="ejercicio3.php" class="list-group-item list-group-item-action" aria-current="true">3. ¿Aprueba o no aprueba?</a>
+        <a href="ejercicio4.php" class="list-group-item list-group-item-action" aria-current="true">4. Descuento del 20%</a>
+        <a href="ejercicio5.php" class="list-group-item list-group-item-action" aria-current="true">Ejercicio 5</a>
+        <a href="ejercicio6.php" class="list-group-item list-group-item-action" aria-current="true">Ejercicio 6</a>
+        <a href="ejercicio7.php" class="list-group-item list-group-item-action" aria-current="true">Ejercicio 7</a>
+        <a href="ejercicio8.php" class="list-group-item list-group-item-action" aria-current="true">Ejercicio 8</a>
+      </div>
+    </main>
+    <footer class="bg-dark mt-3 p-5 text-center">
+      <p class="text-white ">Kevin Mauricio Mejía Almansa - ADSO 2558265</p>
+    </footer>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
   </body>
