@@ -50,25 +50,27 @@
         </div>
       </nav>
     </header>
-    <main class="container">
+    <main class="container text-center">
         <h1>Comisiones por ventas</h1>
         <p>Calcular las comisiones del vendedor según el precio de venta</p>
-        <form class="col-3 m-3" method="post">
-            <div class="mb-3">
-                <label for="valor " class="form-label">Valor venta</label>
-                <input type="number" class="form-control" id="valor" name="valor">
-            </div>
-            <select class="form-select" name="precios">
-                <option selected>Seleccionar precios</option>
-                <option value="precioUno">Precio 1</option>
-                <option value="precioDos">Precio 2</option>
-            </select>
-            <button type="submit" class="btn btn-primary m-2" name= "submit">Calcular</button>
-            <p name="parrafo"><?php echo $parrafo; ?></p>
-        </form>
+        <div class="d-flex justify-content-center">
+          <form class="col-3 m-3 text-center" method="post">
+              <div class="mb-3">
+                  <label for="valor " class="form-label">Valor venta</label>
+                  <input type="number" class="form-control" id="valor" name="valor">
+              </div>
+              <select class="form-select" name="precios">
+                  <option selected>Seleccionar precios</option>
+                  <option value="precioUno">Precio 1</option>
+                  <option value="precioDos">Precio 2</option>
+              </select>
+              <button type="submit" class="btn btn-primary m-2" name= "submit">Calcular</button>
+              <p name="parrafo"><?php echo $parrafo; ?></p>
+          </form>
+        </div>
     </main>
     <footer class="bg-dark mt-3 p-5 text-center">
-      <p class="text-white ">Kevin Mauricio Mejía Almansa - ADSO 2558265</p>
+      <p class="text-white small">Kevin Mauricio Mejía Almansa - ADSO 2558265</p>
     </footer>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>

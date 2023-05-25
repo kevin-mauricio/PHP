@@ -1,25 +1,23 @@
 <?php
+    $parrafo = "";
     if (isset($_REQUEST['boton'])) {
-        $valor = $_REQUEST['valor'];
-        $descuento = 0;
+      $actividad = $_REQUEST['actividad'];
+      $tiempo = $_REQUEST['tiempo'];
 
-        if ($valor > 100000) {
-            $descuento = $valor * 0.2;
-            $total = $valor - $descuento;
-            $parrafo = "Valor de la compra = ".$valor.'<br>'."Descuento = ".$descuento.'<br>'."Total = ".$total;
-        } else {
-            $parrafo = "Valor de la compra = ".$valor.'<br>'."Descuento = ".$descuento.'<br>'."Total = ".$valor;
-        }
-    } else {
-        $parrafo = "Ingrese el valor de la compra";
-    }
+      if ($actividad == 'dormir') {
+        $calorias = $tiempo * 1.08;
+      } else {
+        $calorias = $tiempo * 1.66;
+      }
+      $parrafo = "Calorías quemadas: ".$calorias;
+    } 
 ?>
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Descuento</title>
+    <title>Calorías</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="css/styles.css">
   </head>
@@ -42,15 +40,33 @@
         </div>
       </nav>
     </header>
-    <main class="container text-center">
-        <h1>Descuento del 20%</h1>
-        <p>Calcular descuento del 20% para compras mayores a $100.000</p>
+    <main class="container">
+      <div class="d-flex justify-content-center text-center">
+        <div>
+          <h1>Contador de calorías</h1>
+          <p>Calcular las calorías quemadas según la actividad realizada</p>
+          <h3>Seleccione una actividad</h3>
+        </div>
+      </div>
         <div class="d-flex justify-content-center">
           <form class="col-3 m-3" method="post">
-              <div class="mb-3">
-                  <input type="number" placeholder="Valor de la compra" class="form-control" name="valor">
+            <div class="mb-3">
+                <label for="tiempo " class="form-label">Ingrese el tiempo</label>
+                <input type="number" placeholder="minutos" class="form-control" name="tiempo" id="tiempo" step="0.01">
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="actividad" id="actividad1" value="dormir">
+                <label class="form-check-label" for="actividad1">
+                  Dormir
+                </label>
               </div>
-              <button type="submit" class="btn btn-primary m-2" name= "boton">Comprar</button>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="actividad" id="actividad2" value="sentado">
+                <label class="form-check-label" for="actividad2">
+                  Estar sentado
+                </label>
+              </div>
+              <button type="submit" class="btn btn-primary m-2" name= "boton">Calcular</button>
               <p name="parrafo"><?php echo $parrafo; ?></p>
           </form>
         </div>

@@ -44,24 +44,26 @@
                 </div>
             </nav>
         </header>
-        <main class="container">
+        <main class="container text-center">
             <h1>¿Aprueba o no aprueba?</h1>
             <p>Calcular el promedio de tres notas</p>
-            <form class="col-3 m-3" method="post">
-                <div class="mb-3">
-                    <label for="input1" class="form-label">Nota 1</label>
-                    <input type="number" class="form-control" id="input1" name="nota1" step="0.01">
-                    <label for="input2" class="form-label">Nota 2</label>
-                    <input type="number" class="form-control" id="input2" name="nota2" step="0.01">
-                    <label for="input3" class="form-label">Nota 3</label>
-                    <input type="number" class="form-control" id="input3" name="nota3" step="0.01">
-                </div>
-                <button type="submit" class="btn btn-primary m-2" name= "promedio">Promedio</button>
-                <p name="parrafo"><?php echo $parrafo; ?></p>
-            </form>
+            <div class="d-flex justify-content-center">
+                <form class="col-3 m-3" method="post">
+                    <div class="mb-3">
+                        <label for="input1" class="form-label">Nota 1</label>
+                        <input type="number" class="form-control" id="input1" name="nota1" step="0.01">
+                        <label for="input2" class="form-label">Nota 2</label>
+                        <input type="number" class="form-control" id="input2" name="nota2" step="0.01">
+                        <label for="input3" class="form-label">Nota 3</label>
+                        <input type="number" class="form-control" id="input3" name="nota3" step="0.01">
+                    </div>
+                    <button type="submit" class="btn btn-primary m-2" name= "promedio">Promedio</button>
+                    <p name="parrafo"><?php echo $parrafo; ?></p>
+                </form>
+            </div>
         </main>
         <footer class="bg-dark mt-3 p-5 text-center">
-        <p class="text-white ">Kevin Mauricio Mejía Almansa - ADSO 2558265</p>
+        <p class="text-white small">Kevin Mauricio Mejía Almansa - ADSO 2558265</p>
         </footer>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
     </body>
