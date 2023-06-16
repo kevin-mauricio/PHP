@@ -28,3 +28,24 @@ CREATE TABLE factura(
 
 INSERT INTO proveedor(nombre, ubicacion, telefono)
 VALUE ("Mauro", "Dosquebradas", "3202152617");
+
+
+-- creando procedimiento para insertar
+DELIMITER //
+CREATE PROCEDURE pr_insertar_proveedor(IN p_nombreProveedor VARCHAR(80), IN p_ubicacionProveedor VARCHAR(100), IN p_telefonoProveedor CHAR(10))
+BEGIN
+    INSERT INTO proveedor(nombre, ubicacion, telefono)
+    VALUES (p_nombreProveedor, p_ubicacionProveedor, p_telefonoProveedor);
+END;
+// DELIMITER ;
+
+-- creando trigger para insertar datos proveedor
+DELIMITER //
+CREATE TRIGGER tr_insertar_proveedor BEFORE INSERT ON proveedor
+FOR EACH ROW
+BEGIN 
+    IF (NEW.nombre != NULL) THEN
+        CALL pr_insertar_proveedor(NEW.nombre, NEW.ubicacion, NEW.telefono);
+    END IF;
+END;
+// DELIMITER ;

@@ -74,38 +74,26 @@ while ($registro = $consulta_proveedor -> fetch_array()) {
             <div class="container">
                     <div class="row-formulario d-flex justify-content-center my-5">
                         <div class="col-4">
-                            <form method="POST">
+                            <form action="" method="POST">
                             <h1>Registar proveedor</h1>
                             <div class="mb-3">
                                 <label for="inputnombres" class="form-label">Nombres</label>
-                                <input type="text" class="form-control" id="inputnombres" name="nombres_proveedor">
+                                <input type="text" class="form-control" id="inputnombres" name="nombres_proveedor" required>
                             </div>
                             <div class="mb-3">
                                 <label for="inputubicacion" class="form-label">Ubicación</label>
-                                <input type="text" class="form-control" id="inputubicacion" name="ubicacion_proveedor">
+                                <input type="text" class="form-control" id="inputubicacion" name="ubicacion_proveedor" required>
                             </div>
                             <div class="mb-3 col-4">
                                 <label for="inputtelefono" class="form-label">Teléfono</label>
-                                <input type="number" class="form-control" id="inputtelefono" name="telefono_proveedor">
+                                <input type="tel" class="form-control" id="inputtelefono" name="telefono_proveedor" pattern="[0-9]{10}" placeholder="3223332244" required>
                             </div>
-                            <button type="submit" class="btn btn-outline-dark" name="submit">Registrar</button>
-                        </form>
+                            <button type="submit" class="btn btn-outline-dark" name="registrar_proveedor">Registrar</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-            <?php
-            if (empty($_POST['submit']) /* || empty($_POST['ubicacion_proveedor']) || empty($_REQUEST['telefono_proveedor']) */) {
-                $mensaje = "Pro favor, ingrese los datos completos";
-                echo '<div class="alert alert-info">' . $mensaje . '</div>';
-            } else {
-                echo "ingresado";
-            }
-/*             if (isset($_POST['nombres_proveedor']) && isset($_POST['ubicacion_proveedor']) && isset($_POST['telefono_proveedor'])) {
-                echo "Funciona";
-            } else {
-                echo "No funciona";
-            } */
-            ?>
         </main>
 
         <!-- Footer-->
