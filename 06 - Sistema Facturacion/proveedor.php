@@ -77,6 +77,10 @@ while ($registro = $consulta_proveedor -> fetch_array()) {
                             <form action="" method="POST">
                             <h1>Registar proveedor</h1>
                             <div class="mb-3">
+                                <label for="inputnit" class="form-label">NIT</label>
+                                <input type="text" class="form-control" id="inputnit" name="nit_proveedor" required>
+                            </div>
+                            <div class="mb-3">
                                 <label for="inputnombres" class="form-label">Nombres</label>
                                 <input type="text" class="form-control" id="inputnombres" name="nombres_proveedor" required>
                             </div>

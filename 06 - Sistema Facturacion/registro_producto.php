@@ -15,7 +15,7 @@
         <link href="css/styles.css" rel="stylesheet" />
         <style>
             .fondo{
-                background-image: url('assets/fondo-registro-desenfocado.png');
+                background-image: url('assets/fondo-producto.jpg');
                 background-repeat: no-repeat; /* Evita que se repita la imagen en el fondo */
                 background-size: cover; /* Ajusta la imagen para que cubra todo el fondo */
             }
@@ -24,17 +24,13 @@
     <body class="fondo">
         <!-- modal confirmando el registro (proveedor y producto) -->
         <form action="" method="post">
-            <div class="card mx-auto" style="width: 30rem; margin-top: 35vh;">
+            <div class="card mx-auto" style="width: 30rem; margin-top: 15rem;">
                 <div class="card-body text-center">
                     <h5 class="card-title"></h5>
-                    <p class="card-text">¡Registro éxitoso!</p>
-                    <a href="index.php" class="btn btn-primary">Continuar</a>
+                    <p class="card-text">¡Registro de producto éxitoso!</p>
+                    <a href="producto.php" class="btn btn-outline-dark">Continuar</a>
                 </div>
             </div>
         </form>
     </body>
 </html>
-<?php
-if (isset($_POST['confirmar-registro'])) {
-    header("Location: index.php");
-}

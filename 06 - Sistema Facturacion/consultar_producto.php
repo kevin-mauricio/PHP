@@ -1,6 +1,9 @@
 <?php
 include_once("conexion.php");
-$consulta_proveedores = $conexion->query("SELECT id_proveedor, nombre FROM proveedor");
+$consulta_productos = $conexion->query(
+    "SELECT * FROM producto"
+);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +12,7 @@ $consulta_proveedores = $conexion->query("SELECT id_proveedor, nombre FROM prove
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Registro de productos</title>
+        <title>Consultar Productos</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Bootstrap icons-->
@@ -56,67 +59,78 @@ $consulta_proveedores = $conexion->query("SELECT id_proveedor, nombre FROM prove
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
                     <h1 class="display-4 fw-bolder">Productos</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">Agrega y consulta los Productos</p>
-                    <a href="consultar_producto.php" class="btn btn-info">Consultar</a>
                 </div>
             </div>
         </header>
 
         <main>
             <div class="container">
-                    <div class="row-formulario d-flex justify-content-center my-5">
-                        <div class="col-4">
-                            <form action="" method="POST">
-                            <h1>Registar producto</h1>
-                            <div class="mb-3">
-                                <label for="inputnombre" class="form-label">Nombre</label>
-                                <input type="text" class="form-control" id="inputnombre" name="nombre_producto" required>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" name="descripcion_producto"></textarea>
-                                <label for="floatingTextarea">Descripción del producto</label>
-                            </div>
-                            <select class="form-select mb-3" aria-label="Default select example" name="proveedores" required>
+                <table class="table">
+                    <thead>
+                        <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">NOMBRE</th>
+                        <th scope="col">PRECIO</th>
+                        <th scope="col">STOCK</th>
+                        <th scope="col">VER</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        if($consulta_productos->num_rows > 0) {
+                            while($row = $consulta_productos->fetch_assoc()) {
+                                $id = $row['id_producto'];
+                                $nombre = $row['nombre'];
+                                $id_proveedor = $row['id_proveedor'];
+                                $descripcion = $row['descripcion'];
+                                $costo = $row['costo'];
+                                $precio = $row['precio'];
+                                $stock = $row['stock'];
 
-
-                                <option selected>Seleccione el proveedor</option>
-                                <?php
-                                if ($consulta_proveedores->num_rows > 0) {
-                                    ?>
-                                        <?php
-                                        while ($row = $consulta_proveedores->fetch_assoc()) {
-                                            $idProveedor = $row['id_proveedor'];
-                                            $nombreProveedor = $row['nombre'];
+                                ?>
+                                <tr>
+                                    <th scope="row"><?php echo $id; ?></th>
+                                    <td><?php echo $nombre ?></td>
+                                    <td><?php echo $precio ?></td>
+                                    <td><?php echo $stock ?></td>
+                                    <td>
+                                        <form action="" method="post">
+                                            <button class="btn btn-primary" type="button" name="detalles" value="<?php echo $id; ?>" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Detalles</button>
+                                            <?php
+                                        if (isset($_POST['detalles'])) {
+                                            $id = $_POST['detalles'];
+                                            // consultando el nombre del proveedor
+                                            $nombre_proveedor = $conexion->query(
+                                                "SELECT nombre FROM proveedor WHERE id_proveedor = $id_proveedor;"
+                                            );
                                             ?>
-                                            <option value="<?php echo $idProveedor; ?>"><?php echo $nombreProveedor; ?></option>
+                                            <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+                                            <div class="offcanvas-header">
+                                                <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Detalles del producto</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                            </div>
+                                            <div class="offcanvas-body">
+                                                <p>Nombre: <?php echo $nombre ?></p>
+                                                <p>ID: <?php echo $id ?></p>
+                                                <p>Proveedor: <?php echo $id_proveedor; ?></p>
+                                                <p>Descripción: <?php echo $descripcion ?></p>
+                                                <p>Costo: <?php echo $costo ?></p>
+                                                <p>Precio: <?php echo $precio ?></p>
+                                                <p>Stock: <?php echo $stock ?></p>
+                                            </div>
+                                            </div>
                                             <?php
                                         }
                                         ?>
-                                    <?php
-                                } else {
-                                    ?>
-                                    <option value="null">No hay proveedores registrados</option>';
-                                    <?php
-                                }
-                                ?>
-                            </select>
-                            <div class="mb-3 col-3">
-                                <label for="inputcosto" class="form-label">Costo</label>
-                                <input type="number" class="form-control" id="inputcosto" name="costo_producto" step="any" required>
-                            </div>
-                            <div class="mb-3 col-3">
-                                <label for="inputprecio" class="form-label">Precio venta</label>
-                                <input type="number" class="form-control" id="inputprecio" name="precio_producto" step="any" required>
-                            </div>
-                            <div class="mb-3 col-3">
-                                <label for="inputstock" class="form-label">Stock</label>
-                                <input type="number" class="form-control" id="inputstock" name="stock_producto" required>
-                            </div>
-                            <button type="submit" class="btn btn-outline-dark d-flex justify-content-center" name="registrar_producto">Registrar</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+                                    </form>
+                                </td>
+                                </tr>
+                                <?php
+                            }
+                        }
+                        ?>
+                    </tbody>
+                </table>
             </div>
         </main>
 
