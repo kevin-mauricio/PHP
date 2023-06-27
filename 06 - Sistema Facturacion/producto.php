@@ -100,17 +100,19 @@ $consulta_proveedores = $conexion->query("SELECT id_proveedor, nombre FROM prove
                                 }
                                 ?>
                             </select>
-                            <div class="mb-3 col-3">
-                                <label for="inputcosto" class="form-label">Costo</label>
-                                <input type="number" class="form-control" id="inputcosto" name="costo_producto" step="any" required>
-                            </div>
-                            <div class="mb-3 col-3">
-                                <label for="inputprecio" class="form-label">Precio venta</label>
-                                <input type="number" class="form-control" id="inputprecio" name="precio_producto" step="any" required>
-                            </div>
-                            <div class="mb-3 col-3">
-                                <label for="inputstock" class="form-label">Stock</label>
-                                <input type="number" class="form-control" id="inputstock" name="stock_producto" required>
+                            <div class="row">
+                                <div class="mb-3 col-4">
+                                    <label for="inputcosto" class="form-label">Costo</label>
+                                    <input type="number" class="form-control" id="inputcosto" name="costo_producto" step="any" required>
+                                </div>
+                                <div class="mb-3 col-4">
+                                    <label for="inputprecio" class="form-label">Precio venta</label>
+                                    <input type="number" class="form-control" id="inputprecio" name="precio_producto" step="any" required>
+                                </div>
+                                <div class="mb-3 col-4">
+                                    <label for="inputstock" class="form-label">Stock</label>
+                                    <input type="number" class="form-control" id="inputstock" name="stock_producto" required>
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-outline-dark d-flex justify-content-center" name="registrar_producto">Registrar</button>
                             </form>

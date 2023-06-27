@@ -28,7 +28,7 @@
                 <div class="card-body text-center">
                     <h5 class="card-title"></h5>
                     <p class="card-text">¡Registro de producto éxitoso!</p>
-                    <a href="producto.php" class="btn btn-outline-dark">Continuar</a>
+                    <a href="consultar_producto.php" class="btn btn-outline-dark">Continuar</a>
                 </div>
             </div>
         </form>

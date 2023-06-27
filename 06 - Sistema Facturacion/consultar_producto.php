@@ -57,12 +57,20 @@ $consulta_productos = $conexion->query("SELECT * FROM producto");
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
                     <h1 class="display-4 fw-bolder">Productos</h1>
+                    <a href="producto.php" class="btn btn-info">Agregar</a>
                 </div>
             </div>
         </header>
 
         <main>
             <div class="container p-4">
+                <?php if(isset($_SESSION['mensaje'])): ?>
+                    <div class="alert alert-<?= $_SESSION['mensaje_tipo'];?> alert-dismissible fade show" role="alert">
+                        <?= $_SESSION['mensaje']; ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    
+                    <?php session_unset(); endif; ?>
                 <div class="col text-center">
                     <table class="table">
                         <thead>
@@ -98,7 +106,7 @@ $consulta_productos = $conexion->query("SELECT * FROM producto");
                                         <td><?php echo $precio; ?></td>
                                         <td><?php echo $stock; ?></td>
                                         <td>
-                                            <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalDetalles<?php echo $id; ?>">Detalles</button>
+                                            <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalDetalles<?php echo $id; ?>"><i class="fa-sharp fa-solid fa-circle-info"></i></button>
     
                                             <!-- Modal para mostrar los detalles del producto -->
                                             <div class="modal fade" id="modalDetalles<?php echo $id; ?>" tabindex="-1" aria-labelledby="modalDetallesLabel<?php echo $id; ?>" aria-hidden="true">
@@ -122,7 +130,82 @@ $consulta_productos = $conexion->query("SELECT * FROM producto");
                                             </div>
                                         </td>
                                         <td>
-                                            <a class="btn btn-success m-1" href="modificar.php?id<?=$id; ?>">Modificar</a><a class="btn btn-danger" href="">Eliminar</a>
+                                            <!-- boton para Modificar -->
+                                            <button class="btn btn-success m-1" type="button" data-bs-toggle="modal" data-bs-target="#modalModificar<?php echo $id; ?>"><i class="fa-solid fa-pen"></i></button>
+    
+                                            <!-- Modal para Modificar producto -->
+                                            <div class="modal fade" id="modalModificar<?php echo $id; ?>" tabindex="-1" aria-labelledby="modalModificarLabel<?php echo $id; ?>" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="modalModificarLabel<?php echo $id; ?>">Modificando producto...</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body p-4">
+                                                            <!-- Formulario para modificar producto -->
+                                                            <form action="" method="POST">
+                                                                <?php $_SESSION['id_producto'] = $id; ?>
+                                                                <div class="row d-flex justify-content-center">
+                                                                    <div class="mb-3 col-4">
+                                                                        <label class="form-label" for="inputid">Id del producto</label>
+                                                                        <input type="number" class="form-control" id="inputid" value="<?php echo $id; ?>" name="id_producto" disabled>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <input type="text" class="form-control" id="inputnombre" value="<?php echo $nombre; ?>" name="nombre_producto" required>
+                                                                </div>
+                                                                <div class="form-floating mb-3">
+                                                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" value="<?php echo $descripcion; ?>" name="descripcion_producto"><?php echo $descripcion; ?></textarea>
+                                                                    <label for="floatingTextarea">Descripción del producto</label>
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label for="inputproveedor" class="form-label">Proveedor</label>
+                                                                    <input type="text" class="form-control" id="inputproveedor" value="<?php echo $nombre_proveedor; ?>" name="proveedor_producto" disabled>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="mb-3 col-4">
+                                                                        <label for="inputcosto" class="form-label">Costo</label>
+                                                                        <input type="number" class="form-control" id="inputcosto" value="<?php echo $costo; ?>" name="costo_producto" step="any" disabled>
+                                                                    </div>
+                                                                    <div class="mb-3 col-4">
+                                                                        <label for="inputprecio" class="form-label">Precio venta</label>
+                                                                        <input type="number" class="form-control" id="inputprecio" value="<?php echo $precio; ?>" name="precio_producto" step="any">
+                                                                    </div>
+                                                                    <div class="mb-3 col-4">
+                                                                        <label for="inputstock" class="form-label">Stock</label>
+                                                                        <input type="number" class="form-control" id="inputstock" value="<?php echo $stock; ?>" name="stock_producto">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row d-flex justify-content-center">
+                                                                    <button type="submit" class="btn btn-outline-dark d-flex justify-content-center col-8" name="modificar_producto">Modificar</button>   
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- boton para eliminar -->
+                                            <button class="btn btn-danger m-1" type="button" data-bs-toggle="modal" data-bs-target="#modalEliminar<?php echo $id; ?>"><i class="fa-solid fa-trash"></i></button>
+    
+                                            <!-- Modal para eliminar producto -->
+                                            <div class="modal fade" id="modalEliminar<?php echo $id; ?>" tabindex="-1" aria-labelledby="modalEliminarLabel<?php echo $id; ?>" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="modalEliminarLabel<?php echo $id; ?>">Eliminando producto...</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>¿Eliminar este producto?</p>
+                                                            <form action="" method="post">
+                                                            <?php $_SESSION['id_producto'] = $id; ?>
+                                                                <input type="text" value="<?php echo $nombre; ?>" name="id_producto" disabled>
+                                                                <input type="submit" value="Eliminar" name="eliminar_producto">
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                 <?php
