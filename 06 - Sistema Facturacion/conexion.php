@@ -14,11 +14,11 @@ if (isset($_POST['registrar_proveedor'])) {
         $insertar_proveedor = $conexion->query(
             "INSERT INTO proveedor(nit, nombre, ubicacion, telefono) 
             VALUES ('$nit', '$nombre', '$ubicacion', '$telefono');"
-            );
+        );
         header("Location: registro_proveedor.php");
         exit();
     } catch (Exception $e) {
-        echo '<div class="alert alert-danger" role="alert">Error al insertar proveedor: '. $e->getMessage().'</div>';
+        echo '<div class="alert alert-danger" role="alert">Error al insertar proveedor: ' . $e->getMessage() . '</div>';
     }
 }
 
@@ -42,7 +42,11 @@ if (isset($_POST['registrar_producto'])) {
         header("Location: registro_producto.php");
         exit();
     } catch (Exception $e) {
-        echo '<div class="alert alert-danger" role="alert">Error al registar producto: '. $e->getMessage().'</div>';
+        echo '<div class="alert alert-danger" role="alert">Error al registar producto: ' . $e->getMessage() . '</div>';
     }
-    
+
+}
+
+if (isset($_POST['btn_terminar'])) {
+    echo '<div role="alert" class="alert alert-success">Proceso finalizado</div>';
 }

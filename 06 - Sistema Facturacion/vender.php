@@ -17,7 +17,7 @@ function retornarIndex($items_factura): int
 }
 echo retornarIndex($items_factura);
 ?>
-<div class="container bg-light">
+<div class="container bg-light my-5">
     <div class="row p-5">
         <div class="col-6">
             <div class="p-2 d-flex justify-content-center">
@@ -82,6 +82,7 @@ echo retornarIndex($items_factura);
             // CLIC A AGREGAR
             if (isset($_POST['agregar_carrito'])) {
                 session_unset();
+                $numero_producto = 1;
                 $id_producto = $_POST['id_producto'];
                 $cantidad_producto = $_POST['cantidad_producto'];
                 $nombre_producto = $_POST['nombre_producto'];
@@ -99,6 +100,7 @@ echo retornarIndex($items_factura);
                     <?php
                 }
             } else {
+                $numero_producto = "";
                 $id_producto = "";
                 $cantidad_producto = "";
                 $nombre_producto = "";
@@ -122,7 +124,7 @@ echo retornarIndex($items_factura);
                 </thead>
                 <tbody>
                     <tr>
-                        <td>1</td>
+                        <td><?php echo $numero_producto; ?></td>
                         <td>
                             <?php echo $id_producto; ?>
                         </td>
