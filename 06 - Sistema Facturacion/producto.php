@@ -16,7 +16,7 @@ $consulta_proveedores = $conexion->query("SELECT id_proveedor, nombre FROM prove
 
 <main>
     <div class="container">
-        <div class="row-formulario d-flex justify-content-center my-5">
+        <div class="row-formulario d-flex justify-content-center my-5 py-5 border">
             <div class="col-4">
                 <form action="" method="POST">
                     <h1>Registar producto</h1>
@@ -69,8 +69,10 @@ $consulta_proveedores = $conexion->query("SELECT id_proveedor, nombre FROM prove
                             <input type="number" class="form-control" id="inputstock" name="stock_producto" required>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-outline-dark d-flex justify-content-center"
-                        name="registrar_producto">Registrar</button>
+                    <div class="col d-flex justify-content-center">
+                        <button type="submit" class="btn btn-outline-dark w-50"
+                            name="registrar_producto">Registrar</button>
+                    </div>
                 </form>
             </div>
         </div>

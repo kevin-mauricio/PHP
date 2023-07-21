@@ -1,6 +1,6 @@
 <?php
 include_once("conexion.php");
-$consulta_productos = $conexion->query("SELECT * FROM producto");
+$consulta_productos = $conexion->query("SELECT * FROM producto WHERE estado = 1;");
 ?>
 <?php include("includes/header.php") ?>
         <!-- Header-->
@@ -67,7 +67,7 @@ $consulta_productos = $conexion->query("SELECT * FROM producto");
                                                             <h5 class="modal-title" id="modalDetallesLabel<?php echo $id; ?>">Detalles del producto - <?php echo $nombre; ?></h5>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <div class="modal-body">
+                                                        <div class="modal-body text-start">
                                                             <p>Nombre: <?php echo $nombre; ?></p>
                                                             <p>Id Producto: <?php echo $id; ?></p>
                                                             <p>Proveedor: <?php echo $nombre_proveedor; ?></p>

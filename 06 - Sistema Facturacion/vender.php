@@ -15,9 +15,8 @@ function retornarIndex($items_factura): int
     $index = count($items_factura);
     return $index;
 }
-echo retornarIndex($items_factura);
 ?>
-<div class="container bg-light my-5">
+<div class="container border bg-light my-5">
     <div class="row p-5">
         <div class="col-6">
             <div class="p-2 d-flex justify-content-center">
@@ -26,7 +25,7 @@ echo retornarIndex($items_factura);
                         aria-label=".form-select-lg example">
                         <option selected>Seleccionar producto</option>
                         <?php
-                        $buscar = $conexion->query("SELECT * FROM producto");
+                        $buscar = $conexion->query("SELECT * FROM producto WHERE estado = 1 ORDER BY nombre ASC;");
                         if ($buscar->num_rows > 0) {
                             while ($row = $buscar->fetch_assoc()) {
                                 $id = $row['id_producto'];

@@ -1,14 +1,11 @@
 <?php include("conexion.php"); ?>
 <?php
 if (isset($_GET['id_producto'])) {
-    /* creando la factura en la base de datos */
     $idProducto = $_GET['id_producto'];
     $nombreProducto = $_GET['nombre_producto'];
     $precioProducto = $_GET['precio_producto'];
     $cantidadProducto = $_GET['cantidad_producto'];
     $subtotal = $_GET['subtotal'];
-    // Realizar las operaciones necesarias con los datos capturados
-
 }
 
 if (isset($_POST['btn_pagar'])) {
@@ -27,10 +24,14 @@ if (isset($_POST['btn_pagar'])) {
 <?php include("includes/header.php") ?>
 <div class="container">
     <div class="row p-5">
-        <div <?php echo (isset($_POST['btn_terminar'])) ?'' :'hidden' ?> class="d-flex justify-content-center">
-            <img class="img-fluid w-50" src="assets/fondo-producto.jpg" alt="">
-        </div>
-        <div class="col-10 bg-dark border mx-auto p-4" <?php echo (isset($_POST['btn_terminar'])) ?'hidden' :''  ?>>
+        <?php if (isset($_POST['btn_terminar'])) {
+            ?>
+            <div class="d-flex justify-content-center">
+                <img class="img-fluid w-50" src="assets/fondo-producto.jpg" alt="">
+            </div>
+            <?php
+        } ?>
+        <div class="col-10 bg-dark border mx-auto p-4" <?php echo (isset($_POST['btn_terminar'])) ? 'hidden' : '' ?>>
             <h1 class="text-light">Facturación ADSO</h1>
             <?php
             date_default_timezone_set('America/Bogota');
@@ -111,14 +112,19 @@ if (isset($_POST['btn_pagar'])) {
                         </div>
                         <?php
                         /* insertando factura y los items a base de datos */
-                            if (isset($_POST['btn_terminar'])) {
-                                $cambio = $_POST['campo_cambio'];
-                                $dineroRecibido = $_POST['dinero_recibido'];
-                                $insertandoFactura = $conexion->query("INSERT INTO factura(dinero_recibido, total_facturado, cambio)
+                        if (isset($_POST['btn_terminar'])) {
+                            $cambio = $_POST['campo_cambio'];
+                            $dineroRecibido = $_POST['dinero_recibido'];
+                            $insertandoFactura = $conexion->query("INSERT INTO factura(dinero_recibido, total_facturado, cambio)
                                 VAlUES ($dineroRecibido, $subtotal, $cambio);");
+                            $buscandoFactura = $conexion->query("SELECT id_factura FROM factura ORDER BY id_factura DESC LIMIT 1;");
+                            while ($row = $buscandoFactura->fetch_assoc()) {
+                                $id_factura = $row['id_factura'];
                             }
-                            
-                   
+                            $insertandoItemsFactura = $conexion->query("INSERT INTO items_factura(id_factura, id_producto, cantidad, subtotal) VALUES($id_factura, $idProducto, $cantidadProducto, $subtotal);");
+
+                            $actualizarStock = $conexion->query("CALL actualizarStock($idProducto, $cantidadProducto);");
+                        }
 
                     //session_unset();
                 } ?>

@@ -1,6 +1,7 @@
 <?php
 session_start();
 $conexion = new mysqli("localhost", "root", "", "sistemafactura");
+mysqli_set_charset($conexion, "utf8mb4");
 
 
 // insertando proveedores...
@@ -49,4 +50,16 @@ if (isset($_POST['registrar_producto'])) {
 
 if (isset($_POST['btn_terminar'])) {
     echo '<div role="alert" class="alert alert-success">Proceso finalizado</div>';
+}
+
+if (isset($_GET['idestado'])) {
+    $id = $_GET['idestado'];
+    $status = $_GET['estado'];
+    if ($status == 'activo') {
+        $actualizandoEstadoFactura = $conexion->query("UPDATE factura SET estado_factura = 0 WHERE id_factura = $id;");
+    } else {
+        $actualizandoEstadoFactura = $conexion->query("UPDATE factura SET estado_factura = 1 WHERE id_factura = $id;");
+    }
+    header("Location: reporte.php");
+    exit();
 }
