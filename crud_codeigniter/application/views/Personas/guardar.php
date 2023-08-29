@@ -11,129 +11,140 @@
 
 <body>
     <div class="container">
+        <a href="listado" class="btn btn-success m-5">Listado</a>
+
         <div class="row">
-            <div class="col-6 m-5">
-                </div>
-                <?php echo form_open(''); ?>
-                <div class="form-group">
-                    <?php
-                    echo form_label('Nombre', 'nombre');
-        
-                    $data = [
-                        'name' => 'nombre',
-                        'value' => '',
-                        'class' => 'form-control input-lg',
-                    ];
-                    echo form_input($data);
-                    ?>
-                </div>
-                <div class="form-group">
-                    <?php
-                    echo form_label('Apellido', 'apellido');
-        
-                    $data = [
-                        'name' => 'apellido',
-                        'value' => '',
-                        'class' => 'form-control input-lg',
-                    ];
-                    echo form_input($data);
-                    ?>
-                </div>
-                <div class="form-group">
-                    <?php
-                    echo form_label('Edad', 'edad');
-        
-                    $data = [
-                        'name' => 'edad',
-                        'type' => 'number',
-                        'value' => '',
-                        'class' => 'form-control input-lg',
-                    ];
-                    echo form_input($data);
-                    ?>
-                </div>
-                <div class="form-group">
-                    <?php
-                    echo form_label('Genero:', 'genero', 'class="mt-3 me-5"');
-        
-                    echo form_label('Maculino:', 'femenino', 'class="mt-3"');
-                    $data = [
-                        'name' => 'genero',
-                        'id' => 'femenino',
-                        'value' => 'F',
-                        'checked' => false,
-                        'style' => 'margin:10px',
-                    ];
-                    echo form_radio($data);
-                    echo form_label('Femenino:', 'femenino', 'class="mt-3"');
-                    $data = [
-                        'name' => 'genero',
-                        'id' => 'femenino',
-                        'value' => 'F',
-                        'checked' => false,
-                        'style' => 'margin:10px',
-                    ];
-                    echo form_radio($data);
-        
-                    ?>
-                </div>
-                <div class="form-group">
-                    <?php
-                    echo form_label('Estado Civil:', 'estado_civil', 'class="mt-3 me-5"');
-        
-                    $opciones = [
-                        'soltero' => 'Soltero',
-                        'casado' => 'Casado',
-                        'viudo' => 'Viudo',
-                    ];
-                    echo form_dropdown('estado_civil', $opciones);
-                    ?>
-                </div>
-                <div class="form-group">
-                    <?php
-                    echo form_label('Habilidades:', 'h', 'class="mt-3 me-5"');
-                    echo form_label('PHP:', 'hh', 'class="mt-3"');
-                    $data = [
-                        'name' => 'habilidades',
-                        'id' => 'php',
-                        'value' => 'PHP',
-                        'checked' => false,
-                        'style' => 'margin:10px',
-                    ];
-                    echo form_checkbox($data);
-        
-                    echo form_label('HTML:', 'html', 'class="mt-3"');
-                    $data = [
-                        'name' => 'habilidades[]',
-                        'id' => 'html',
-                        'value' => 'HTML',
-                        'checked' => false,
-                        'style' => 'margin:10px',
-                    ];
-                    echo form_checkbox($data);
-        
-                    echo form_label('Python:', 'python', 'class="mt-3"');
-                    $data = [
-                        'name' => 'habilidades[]',
-                        'id' => 'python',
-                        'value' => 'python',
-                        'checked' => false,
-                        'style' => 'margin:10px',
-                    ];
-                    echo form_checkbox($data);
-        
-                    echo form_label('AWS:', 'aws', 'class="mt-3"');
-                    $data = [
-                        'name' => 'habilidades[]',
-                        'id' => 'aws',
-                        'value' => 'AWS',
-                        'checked' => false,
-                        'style' => 'margin:10px',
-                    ];
-                    echo form_checkbox($data);
-                    ?>
-                </div>
+            <div class="col-6">
             </div>
+            <?php echo form_open(''); ?>
+            <div class="form-group">
+                <?php
+                echo form_label('Nombre', 'nombre');
+
+                $data = [
+                    'name' => 'nombre',
+                    'value' => $nombre,
+                    'class' => 'form-control input-lg',
+                ];
+                echo form_input($data);
+                ?>
+            </div>
+            <div class="form-group">
+                <?php
+                echo form_label('Apellido', 'apellido');
+
+                $data = [
+                    'name' => 'apellido',
+                    'value' => $apellido,
+                    'class' => 'form-control input-lg',
+                ];
+                echo form_input($data);
+                ?>
+            </div>
+            <div class="form-group">
+                <?php
+                echo form_label('Edad', 'edad');
+
+                $data = [
+                    'name' => 'edad',
+                    'type' => 'number',
+                    'value' => $edad,
+                    'class' => 'form-control input-lg',
+                ];
+                echo form_input($data);
+                ?>
+            </div>
+            <div class="form-group">
+                <label for=""><b>Genero:</b></label>
+                <br>
+                <?php
+                echo form_label('Masculino', 'genero');
+
+                $data = [
+                    'name' => 'genero',
+                    'value' => 'Masculino',
+                    'class' => 'form-check-input',
+                    'checked' => ($genero == "Masculino" ? true : false),
+                ];
+                echo form_radio($data);
+                ?>
+            </div>
+            <div class="form-group">
+                <?php
+                echo form_label('Femenino', 'genero');
+
+                $data = [
+                    'name' => 'genero',
+                    'value' => 'Femenino',
+                    'class' => 'form-check-input',
+                    'checked' => ($genero == "Femenino" ? true : false),
+                ];
+                echo form_radio($data);
+                ?>
+            </div>
+            <div class="form-group">
+                <?php
+                $options = [
+                    '' => 'Seleccione su estado',
+                    'soltero' => 'Soltero(contento)',
+                    'casado' => 'Casado(triste)',
+                    'viudo' => 'Viudo(contento)',
+                ];
+
+                $selected_option = 'casado'; // Valor que deseas seleccionar por defecto
+                
+                echo form_dropdown('estado_civil', $options, $selected_option);
+                ?>
+            </div>
+
+            <div class="form-group">
+                <h2 class="">Habilidades:</h2>
+                <label for="">PHP</label>
+                <?php
+                $data = [
+                    'name' => 'php',
+                    'value' => 'si',
+                    'checked' => ($php == "si" ? true : false),
+                    'class' => 'form-check-input',
+                ];
+                echo form_checkbox($data);
+                ?>
+                <label for="">HTML</label>
+                <?php
+                $data = [
+                    'name' => 'html',
+                    'value' => 'si',
+                    'checked' => ($html == "si" ? true : false),
+                    'class' => 'form-check-input',
+                ];
+
+                echo form_checkbox($data);
+                ?>
+                <label for="">Python</label>
+                <?php
+                $data = [
+                    'name' => 'python',
+                    'value' => 'si',
+                    'checked' => ($python == "si" ? true : false),
+                    'class' => 'form-check-input',
+                ];
+
+                echo form_checkbox($data);
+                ?>
+                <label for="">AWS</label>
+                <?php
+                $data = [
+                    'name' => 'aws',
+                    'value' => 'si',
+                    'checked' => ($aws == "si" ? true : false),
+                    'class' => 'form-check-input',
+                ];
+
+                echo form_checkbox($data);
+                ?>
+            </div>
+
+        </div>
 
         <?php echo form_submit('mysubmit', 'Enviar', 'class="btn btn-primary mt-3"'); ?>
 
