@@ -37,7 +37,8 @@ class Persona extends CI_Model
 
     }
 
-    function find($id) {
+    function find($id)
+    {
         $this->db->select();
         $this->db->from($this->table);
         $this->db->where($this->table_id, $id);
@@ -61,8 +62,14 @@ class Persona extends CI_Model
         return $this->db->insert_id();
     }
 
-    function update($id, $data) {
+    function update($id, $data)
+    {
         $this->db->where($this->table_id, $id);
         $this->db->update($this->table, $data);
+    }
+    function delete($id)
+    {
+        $this->db->where($this->table_id, $id);
+        $this->db->delete($this->table);
     }
 }

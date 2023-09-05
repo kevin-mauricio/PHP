@@ -43,7 +43,11 @@
                         <td><?php echo ($persona->html == null? "no": "si") ?></td>
                         <td><?php echo ($persona->python == null? "no": "si") ?></td>
                         <td><?php echo ($persona->aws == null? "no": "si") ?></td>
-                        <td><a href="guardar/<?php echo $persona->persona_id;?>" class="btn btn-success">Editar</a></td>
+                        <td class="d-flex">
+                                <a href="ver/<?php echo $persona->persona_id;?>" class="btn btn-info me-1">Ver</a>
+                            <a href="guardar/<?php echo $persona->persona_id;?>" class="btn btn-success me-1">Editar</a>
+                            <a href="borrar/<?php echo $persona->persona_id;?>" class="btn btn-danger me-1">Borrar</a>
+                        </td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
