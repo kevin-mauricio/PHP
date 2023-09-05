@@ -13,7 +13,8 @@
 
         <div class="container">
             <!-- [ boton crear persona ] -->
-            <a href="guardar" class="btn btn-success m-5">Guardar persona</a>
+            <a href="guardar" class="btn btn-success my-5">Guardar persona</a>
+            <!-- [ boton editar persona ] -->
             <!-- [ tabla de personas ] -->
             <table class="table">
                 <thead>
@@ -22,10 +23,12 @@
                         <th scope="col" class="col-auto">Nombres</th>
                         <th scope="col" class="col-auto">Apellidos</th>
                         <th scope="col" class="col-1">Edad</th>
+                        <th scope="col" class="col-1">Estado Civil</th>
                         <th scope="col" class="col-1">PHP</th>
                         <th scope="col" class="col-1">HTML</th>
                         <th scope="col" class="col-1">Python</th>
                         <th scope="col" class="col-1">AWS</th>
+                        <th scope="col" class="col-1"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,10 +38,12 @@
                         <td><?php echo $persona->nombre ?></td>
                         <td><?php echo $persona->apellido ?></td>
                         <td><?php echo $persona->edad ?></td>
+                        <td><?php echo $persona->estado_civil?></td>
                         <td><?php echo ($persona->php == null? "no": "si") ?></td>
                         <td><?php echo ($persona->html == null? "no": "si") ?></td>
                         <td><?php echo ($persona->python == null? "no": "si") ?></td>
                         <td><?php echo ($persona->aws == null? "no": "si") ?></td>
+                        <td><a href="guardar/<?php echo $persona->persona_id;?>" class="btn btn-success">Editar</a></td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>

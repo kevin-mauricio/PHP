@@ -76,6 +76,7 @@ class Personas extends CI_Controller
 
             if (isset($persona_id)) {
                 $this->Persona->update($persona_id, $data);
+                //redirect('personas/listado');
             } else {
                 // Verifica que los campos requeridos no sean nulos
                 if (
@@ -91,13 +92,9 @@ class Personas extends CI_Controller
                     // Alguno de los campos requeridos es nulo, muestra un mensaje de error
                     echo "Todos los campos requeridos deben estar llenos.";
                 }
-
             }
-
         }
         $this->load->view('personas/guardar', $vdata);
-
-
     }
 
     public function borrar()

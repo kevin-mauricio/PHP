@@ -11,7 +11,7 @@
 
 <body>
     <div class="container">
-        <a href="listado" class="btn btn-success m-5">Listado</a>
+        <a href="/actividadesphp/crud_codeigniter/index.php/personas/listado" class="btn btn-success m-5">Listado</a>
 
         <div class="row">
             <div class="col-6">
@@ -85,13 +85,13 @@
             <div class="form-group">
                 <?php
                 $options = [
-                    '' => 'Seleccione su estado',
+                    'default' => 'Seleccione su estado civil',
                     'soltero' => 'Soltero(contento)',
                     'casado' => 'Casado(triste)',
                     'viudo' => 'Viudo(contento)',
                 ];
 
-                $selected_option = 'casado'; // Valor que deseas seleccionar por defecto
+                $selected_option = ($estado_civil == null ? 'default' : $estado_civil); // Valor que deseas seleccionar por defecto
                 
                 echo form_dropdown('estado_civil', $options, $selected_option);
                 ?>
@@ -146,7 +146,9 @@
 
         </div>
 
-        <?php echo form_submit('mysubmit', 'Enviar', 'class="btn btn-primary mt-3"'); ?>
+        <?php
+        echo form_submit('mysubmit', 'Enviar', 'class="btn btn-primary mt-3" ');
+        ?>
 
         <?php echo form_close(); ?>
 
@@ -156,6 +158,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"></script>
+
+    <!-- <script>
+        function some_function() {
+            console.log("funcion");
+            window.location.href = '/actividadesphp/crud_codeigniter/index.php/personas/listado';
+        }
+    </script> -->
 </body>
 
 </html>
