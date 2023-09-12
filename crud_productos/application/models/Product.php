@@ -15,14 +15,14 @@ class Product extends CI_Model
         $this->load->database();
     }
 
-    function find($serial_id) {
+    function find($serial_id)
+    {
         $this->db->select();
-        $this->db->from->($this->table);
-        $this->db->where($this->table_id, $seria_id);
+        $this->db->from($this->table);
+        $this->db->where($this->table_id, $serial_id);
 
         $query = $this->db->get();
         return $query->row();
-
     }
 
     function select()

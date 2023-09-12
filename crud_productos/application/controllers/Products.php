@@ -37,6 +37,15 @@ class Products extends CI_Controller
 
 	public function info($serial_id = null) {
 		$product = $this->Product->find($serial_id);
-		
+
+		if (isset($product)) {
+			$data["serial_id"] = $product->serial_id;
+			$data["name"] = $product->nombre;
+			$data["description"] = $product->descripcion;
+			$data["cost"] = $product->costo;
+			$data["price"] = $product->precio;
+			$data["amount"] = $product->cantidad;
+		}
+		$this->load->view('products/info', $data);
 	}
 }
