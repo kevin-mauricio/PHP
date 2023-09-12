@@ -54,9 +54,9 @@
                   <?php echo $product->cantidad ?>
                 </td>
                 <td>
-                  <a href="" class="btn btn-outline-info text-dark">Info</a>
-                  <a href="" class="btn btn-outline-warning text-dark">Edit</a>
-                  <a href="" class="btn btn-outline-danger text-dark">Delete</a>
+                  <a href="http://127.0.0.1/actividadesphp/crud_productos/index.php/products/info/<?php echo $product->serial_id; ?>" class="btn btn-outline-info text-dark">Info</a>
+                  <a href="http://127.0.0.1/actividadesphp/crud_productos/index.php/products/edit/<?php echo $product->serial_id; ?>" class="btn btn-outline-warning text-dark">Edit</a>
+                  <a href="http://127.0.0.1/actividadesphp/crud_productos/index.php/products/delete/<?php echo $product->serial_id; ?>" class="btn btn-outline-danger text-dark">Delete</a>
                 </td>
               </tr>
             <?php endforeach; ?>
@@ -65,7 +65,7 @@
       </div>
     </div>
     <!-- modal -->
-    <?php include("info.php") ?>
+    <?php //include("info.php") ?>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"

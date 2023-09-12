@@ -40,4 +40,16 @@ class Product extends CI_Model
         return $this->db->insert_id();
     }
 
+    function update($id, $data)
+    {
+        $this->db->where($this->table_id, $id);
+        $this->db->update($this->table, $data);
+    }
+
+    function delete($id)
+    {
+        $this->db->where($this->table_id, $id);
+        $this->db->delete($this->table);
+    }
+
 }
