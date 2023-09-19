@@ -24,4 +24,9 @@ class User extends CI_Model
         return $query->result();
     }
 
+    public function insert($data) {
+        $this->db->insert($this->table, $data);
+        return $this->db->trans_status();
+    }
+
 }

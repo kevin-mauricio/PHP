@@ -17,14 +17,15 @@
             <th scope="col" class="col-auto">Name</th>
             <th scope="col" class="col-auto">Password</th>
             <th scope="col" class="col-auto">Email</th>
-            <th scope="col" class="col-1"></th>
+            <th scope="col" class="col-auto text-center">Options</th>
           </tr>
         </thead>
         <tbody>
           <?php foreach ($users as $key => $user): ?>
             <tr>
               <th scope="row">
-                <?php echo $user->id_user ?>
+                <?php $id_user = $user->id_user ?>
+                <?php echo $id_user; ?>
               </th>
               <td>
                 <?php echo $user->name_user ?>
@@ -35,19 +36,17 @@
               <td>
                 <?php echo $user->email_user ?>
               </td>
-              <td>
+              <td class="text-center">
                 <p class="d-inline-flex gap-1">
-                  <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button"
-                    aria-expanded="false" aria-controls="collapseExample">
+                  <a class="btn btn-primary" data-bs-toggle="collapse" href="#<?php echo $id_user; ?>" role="button"
+                    aria-expanded="false" aria-controls="<?php echo $id_user; ?>">
                     Options
                   </a>
                 </p>
-                <div class="collapse" id="collapseExample">
-                  <div class="card card-body" style="width: auto;">
-                    <a href="" class="btn btn-outline-
-                    ."><i class="bi bi-pencil"></i></a>
-                    <a href="" class="btn btn-outline-
-                    ."></a>
+                <div class="collapse" id="<?php echo $id_user; ?>">
+                  <div class="card card-body w-50 mx-auto">
+                    <a href="" class="btn btn-outline-dark"><i class="bi bi-pencil"></i></a>
+                    <a href="" class="btn btn-outline-dark"><i class="bi bi-trash"></i></a>
                   </div>
                 </div>
               </td>
