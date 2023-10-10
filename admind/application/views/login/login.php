@@ -17,8 +17,8 @@
         <div class="container-fluid h-custom">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-md-9 col-lg-6 col-xl-5 w-25">
-                    <img src="<?php echo base_url() ?>/assets/dist/img/img-login.avif"
-                        class="img-fluid w-100" alt="Sample image">
+                    <img src="<?php echo base_url() ?>/assets/dist/img/img-login.avif" class="img-fluid w-100"
+                        alt="Sample image">
                 </div>
                 <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                     <?php echo form_open('Login/validar_datos'); ?>
@@ -71,7 +71,7 @@
 
                     <div class="text-center text-lg-start mt-4 pt-2">
                         <?php echo form_submit('mysubmit', 'Login', 'class="btn btn-primary mt-3 btn-lg w-25"'); ?>
-                        <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="#!"
+                        <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="<?php echo base_url()?>index.php/Registrar/formularioRegistrar"
                                 class="link-danger">Register</a></p>
                     </div>
                     <?php echo form_close(); ?>
