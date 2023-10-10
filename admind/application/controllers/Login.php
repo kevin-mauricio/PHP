@@ -54,7 +54,8 @@ class Login extends CI_Controller
 	}
 
 
-	public function logOut(){
+	public function logOut()
+	{
 		$this->session->sess_destroy();
 
 		redirect("Login/index", "refresh");

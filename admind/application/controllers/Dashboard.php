@@ -20,7 +20,17 @@ class Dashboard extends CI_Controller
 			redirect('Login/index', 'refresh');
 		} else {
 			$vdata["usuarios"] = $this->Usuario->selectAllUsuarios();
-			$this->load->view('Dashboard/plantilla', $vdata);
+
+			$correo = $this->session->userdata('correo');
+			$usuario = $this->Usuario->selectUsuarioByCorreo($correo);
+
+			$this->session->set_userdata('usuario', $usuario);
+
+			// if ($usuario->rol == 'admin') {
+			// 	$this->load->view('Dashboard/listaUsuarios', $vdata);
+			// } else {
+			// }
+			$this->load->view('Dashboard/listaUsuarios', $vdata);
 		}
 	}
 
@@ -30,15 +40,35 @@ class Dashboard extends CI_Controller
 
 			redirect('Login/index', 'refresh');
 		} else {
-			$vdata["nombre"] = $vdata["passw"] = $vdata["correo"] = "";
-			if ($this->input->server("REQUEST_METHOD") == "POST") {
-				$data["nombre"] = $this->input->post("nombre");
-				$data["passw"] = $this->input->post("passw");
-				$data["correo"] = $this->input->post("email");
-				$this->Usuario->insert($data);
-				redirect("Usuarios/index", "refresh");
+			$correo = $this->session->userdata('correo');
+			$usuario = $this->Usuario->selectUsuarioByCorreo($correo);
+
+			$usuario = $this->session->userdata('usuario');
+
+			if ($usuario->rol == 'admin') {
+				$vdata["nombre"] = $vdata["passw"] = $vdata["correo"] = "";
+				if ($this->input->server("REQUEST_METHOD") == "POST") {
+					$data["nombre"] = $this->input->post("nombre");
+					$data["passw"] = $this->input->post("passw");
+					$data["correo"] = $this->input->post("email");
+					$this->Usuario->insert($data);
+					redirect("Dashboard/index", "refresh");
+				}
+				$this->load->view('Dashboard/crear', $vdata);
+			} else {
+				$this->load->view('Dashboard/vistaProtegida');
+
 			}
-			$this->load->view('Usuarios/crear', $vdata);
+		}
+	}
+	public function vistaProtegida()
+	{
+		if (!$this->session->userdata('correo')) {
+
+			redirect('Login/index', 'refresh');
+		} else {
+
+			$this->load->view('Dashboard/vistaProtegida');
 		}
 	}
 
@@ -49,28 +79,33 @@ class Dashboard extends CI_Controller
 
 			redirect('Login/index', 'refresh');
 		} else {
-			$vdata["nombre"] = $vdata["passw"] = $vdata["correo"] = "";
-			if (isset($id_usuario)) {
-				$usuario = $this->Usuario->selectUsuario($id_usuario);
-				if (isset($usuario)) {
-					$vdata["nombre"] = $usuario->nombre;
-					$vdata["passw"] = $usuario->passw;
-					$vdata["correo"] = $usuario->correo;
-					if ($this->input->server("REQUEST_METHOD") == "POST") {
-						$data["nombre"] = $this->input->post("nombre");
-						$data["passw"] = $this->input->post("passw");
-						$data["correo"] = $this->input->post("email");
-						//----------------------------------------------
-						$vdata["nombre"] = $this->input->post("nombre");
-						$vdata["passw"] = $this->input->post("passw");
-						$vdata["correo"] = $this->input->post("correo");
+			$usuario = $this->session->userdata('usuario');
+			if ($usuario->rol == 'admin') {
+				$vdata["nombre"] = $vdata["passw"] = $vdata["correo"] = "";
+				if (isset($id_usuario)) {
+					$usuario = $this->Usuario->selectUsuario($id_usuario);
+					if (isset($usuario)) {
+						$vdata["nombre"] = $usuario->nombre;
+						$vdata["passw"] = $usuario->passw;
+						$vdata["correo"] = $usuario->correo;
+						if ($this->input->server("REQUEST_METHOD") == "POST") {
+							$data["nombre"] = $this->input->post("nombre");
+							$data["passw"] = $this->input->post("passw");
+							$data["correo"] = $this->input->post("email");
+							//----------------------------------------------
+							$vdata["nombre"] = $this->input->post("nombre");
+							$vdata["passw"] = $this->input->post("passw");
+							$vdata["correo"] = $this->input->post("correo");
 
-						$this->Usuario->updateUsuario($id_usuario, $data);
-						redirect("Dashboard/index", "refresh");
+							$this->Usuario->updateUsuario($id_usuario, $data);
+							redirect("Dashboard/index", "refresh");
+						}
 					}
 				}
+				$this->load->view('Dashboard/crear', $vdata);
+			} else {
+				$this->load->view('Dashboard/vistaProtegida');
 			}
-			$this->load->view('Dashboard/crear', $vdata);
 		}
 
 	}
@@ -78,11 +113,15 @@ class Dashboard extends CI_Controller
 	public function borrar_usuario($id_usuario = null)
 	{
 		if (!$this->session->userdata('correo')) {
-
 			redirect('Login/index', 'refresh');
 		} else {
-			$this->Usuario->deleteUsuario($id_usuario);
-			redirect("Usuarios/index", "refresh");
+			$usuario = $this->session->userdata('usuario');
+			if ($usuario->rol == 'admin') {
+				$this->Usuario->deleteUsuario($id_usuario);
+				redirect("Dashboard/index", "refresh");
+			} else {
+				$this->load->view('Dashboard/vistaProtegida');
+			}
 		}
 	}
 

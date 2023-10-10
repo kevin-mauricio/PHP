@@ -20,6 +20,18 @@
   <link rel="icon" href="<?php echo base_url() ?>/assets/dist/img/lock-solid.svg">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="<?php echo base_url() ?>/assets/plugins/fontawesome-free/css/all.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet"
+    href="<?php echo base_url() ?>/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet"
+    href="<?php echo base_url() ?>/assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet"
+    href="<?php echo base_url() ?>/assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="<?php echo base_url() ?>/assets/dist/css/adminlte.min.css">
+
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -33,7 +45,7 @@
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="<?php echo base_url() ?>index.php/Dashboard/index" class="nav-link">Inicio</a>
+          <a href="#" class="nav-link">Inicio</a>
         </li>
       </ul>
 
@@ -185,7 +197,17 @@
               alt="User Image">
           </div>
           <div class="info">
-            <a href="#" class="d-block">Alexander Pierce</a>
+            <?php
+            $usuario = $this->session->userdata('usuario');
+            if (!empty($usuario)) {
+              ?>
+              <a href="">
+                <?php echo $usuario->nombre; ?>
+              </a>
+              <?php
+            }
+
+            ?>
           </div>
         </div>
 
@@ -206,6 +228,34 @@
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+            <li class="nav-item">
+              <a href="<?php echo base_url() ?>index.php/Dashboard/index" class="nav-link">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  Consultar
+                  <span class="right badge badge-danger">New</span>
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <?php
+              $usuario = $this->session->userdata('usuario');
+              if ($usuario->rol == 'admin') {
+                $ruta = '/crear_usuario';
+              } else {
+                $ruta = '/vistaProtegida';
+              }
+              ?>
+
+              <a href="<?php echo base_url() ?>index.php/Dashboard<?php echo $ruta; ?>" class="nav-link">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  Registrar
+                  <span class="right badge badge-danger">New</span>
+                </p>
+              </a>
+
+            </li>
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt"></i>

@@ -1,7 +1,7 @@
 <?php include('includes/header.php') ?>
 <div class="container bg-whiterounded-3 p-5 rounded-3 shadow-lg p-5 my-5">
         <div class="row">
-            <?php echo form_open(''); ?>
+            <?php echo form_open('Dashboard/crear_usuario'); ?>
             <div class="col-6 mx-auto">
                 <div class="form-group">
                     <?php

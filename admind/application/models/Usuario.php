@@ -5,6 +5,7 @@ class Usuario extends CI_Model {
 
     public $table = 'usuarios';
     public $table_id = 'id_usuario';
+    public $correo = 'correo';
     public function __construct(){
         parent::__construct();
         $this->load->helper('form');
@@ -32,6 +33,14 @@ class Usuario extends CI_Model {
         $this->db->select();
         $this->db->from($this->table);
         $this->db->where($this->table_id, $id_usuario);
+
+        $query = $this->db->get();
+        return $query->row();
+    }
+    public function selectUsuarioByCorreo($correo){
+        $this->db->select();
+        $this->db->from($this->table);
+        $this->db->where($this->correo, $correo);
 
         $query = $this->db->get();
         return $query->row();
