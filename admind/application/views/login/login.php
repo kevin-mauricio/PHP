@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="<?php echo base_url() ?>/assets/dist/css/login/styles.css">
+
+    <!-- logo del navegador -->
+    <link rel="icon" href="<?php echo base_url() ?>/assets/dist/img/lock-solid.svg">
 </head>
 
 <body>
@@ -71,7 +74,8 @@
 
                     <div class="text-center text-lg-start mt-4 pt-2">
                         <?php echo form_submit('mysubmit', 'Login', 'class="btn btn-primary mt-3 btn-lg w-25"'); ?>
-                        <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="<?php echo base_url()?>index.php/Registrar/formularioRegistrar"
+                        <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a
+                                href="<?php echo base_url() ?>index.php/Registrar/formularioRegistrar"
                                 class="link-danger">Register</a></p>
                     </div>
                     <?php echo form_close(); ?>

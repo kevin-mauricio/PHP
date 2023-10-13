@@ -70,7 +70,7 @@
                       <?php echo $usuario->rol ?>
                     </td>
                     <td>
-                      <a href="<?php echo base_url() ?>index.php/Dashboard/modificar_usuario/<?php echo $usuario->id_usuario ?>"
+                      <a href="<?php echo base_url('modificar-usuario') ?>/<?php echo $usuario->id_usuario ?>"
                         class="btn btn-primary"><i class="fa-solid fa-pencil"></i></a>
                     </td>
                     <td>
