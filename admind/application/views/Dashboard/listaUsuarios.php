@@ -50,12 +50,18 @@
                   <th class="col-auto">Password</th>
                   <th class="col-auto">Correo</th>
                   <th class="col-auto">Rol</th>
+                  <th class="col-auto">Estado</th>
                   <th class="col-auto">Editar</th>
                   <th class="col-auto">Eliminar</th>
                 </tr>
               </thead>
               <tbody>
                 <?php foreach ($usuarios as $key => $usuario): ?>
+                  <?php
+                  $correo_login = $this->session->userdata('correo');
+                  $correo_usuario = $usuario->correo;
+                  if ($correo_login != $correo_usuario) {
+                  ?>
                   <tr>
                     <th scope="row">
                       <?php echo $usuario->nombre ?>
@@ -69,15 +75,19 @@
                     <td>
                       <?php echo $usuario->rol ?>
                     </td>
-                    <td>
+                    <td class="text-center">
+                      <?php echo ($usuario->estado == 1 ? 'Activo' : 'Inactivo'); ?>
+                    </td>
+                    <td class="text-center">
                       <a href="<?php echo base_url('modificar-usuario') ?>/<?php echo $usuario->id_usuario ?>"
                         class="btn btn-primary"><i class="fa-solid fa-pencil"></i></a>
                     </td>
-                    <td>
-                      <a href="/crud_usuarios_login/index.php/Usuarios/borrar_usuario/<?php echo $usuario->id_usuario ?>"
-                        class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                    <td class="text-center">
+                      <a href="<?php echo base_url('eliminar-usuario') ?>/<?php echo $usuario->id_usuario ?>"
+                        class="btn btn-primary"><i class="fa-solid fa-trash"></i></a>
                     </td>
                   </tr>
+                  <?php } ?>
                 <?php endforeach; ?>
               </tbody>
               <?php
@@ -92,6 +102,11 @@
               </thead>
               <tbody>
                 <?php foreach ($usuarios as $key => $usuario): ?>
+                  <?php
+                  $correo_login = $this->session->userdata('correo');
+                  $correo_usuario = $usuario->correo;
+                  if ($correo_login != $correo_usuario) {
+                  ?>
                   <tr>
                     <th scope="row">
                       <?php echo $usuario->nombre ?>
@@ -103,6 +118,7 @@
                       <?php echo $usuario->rol ?>
                     </td>
                   </tr>
+                  <?php } ?>
                 <?php endforeach; ?>
               </tbody>
               <?php
@@ -125,4 +141,4 @@
 </div>
 <!-- /.content-wrapper -->
 
-<?php include('includes/footer.php')?>
+<?php include('includes/footer.php') ?>

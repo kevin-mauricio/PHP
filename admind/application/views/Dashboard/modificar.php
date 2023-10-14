@@ -41,7 +41,7 @@
                 <div class="container bg-white rounded-3 p-5 shadow-lg">
                     <!-- CONTENIDO -->
                     <div class="row justify-content-center">
-                        <?php echo form_open(base_url('crear-usuario')); ?>
+                        <?php echo form_open(); ?>
                         <div class="form-group">
                             <?php
                             echo form_label('Nombre', 'nombre');
@@ -69,7 +69,7 @@
                                 'class' => 'bg-light border',
                                 'style' => 'width: 50vh; height: 5vh'
                             ];
-                            $selected_option = 'default'; // Valor que deseas seleccionar por defecto
+                            $selected_option = ($rol == null ? 'default' : $rol); // Valor que deseas seleccionar por defecto
                             echo form_dropdown('rol', $select_option, $selected_option, $data);
                             ?>
                         </div>
@@ -104,7 +104,7 @@
                             $data_sumbit = [
                                 'class' => 'btn btn-primary mt-3 btn-lg w-50'
                             ];
-                            echo form_submit('mysubmit', 'Registrar', $data_sumbit);
+                            echo form_submit('mysubmit', 'Actualizar', $data_sumbit);
                             ?>
                         </div>
                     </div>

@@ -58,3 +58,4 @@ $route['modificar-usuario/(:any)'] = 'Dashboard/modificar_usuario/$1';
 $route['logout'] = 'Login/logOut';
 $route['consultar-usuario'] = 'Dashboard/index';
 $route['crear-usuario'] = 'Dashboard/crear_usuario';
+$route['eliminar-usuario/(:any)'] = 'Dashboard/borrar_usuario/$1';
