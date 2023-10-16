@@ -82,11 +82,11 @@
                     <div class="row mt-3">
                         <div class="col">
                             <?php
-                            $alert = $this->session->flashdata('alert');
-                            if (!empty($alert)) {
+                            $alerta = $this->session->flashdata('alerta');
+                            if (!empty($alerta)) {
                                 ?>
-                                <div class="alert alert-<?php echo $alert['color']; ?>" role="alert">
-                                    <?php echo $alert['mensaje']; ?>
+                                <div class="alert alert-<?php echo $alerta['color']; ?>" role="alert">
+                                    <?php echo $alerta['mensaje']; ?>
                                 </div>
                                 <?php
                             }

@@ -86,19 +86,6 @@
                             echo form_input($data);
                             ?>
                         </div>
-                        <div class="form-group">
-                            <?php
-                            echo form_label('Password', 'passw');
-                            $data = [
-                                'name' => 'passw',
-                                'required' => true,
-                                'type' => 'password',
-                                'value' => $passw,
-                                'class' => 'form-control input-lg',
-                            ];
-                            echo form_input($data);
-                            ?>
-                        </div>
                         <div class="d-grid gap-2 text-center">
                             <?php
                             $data_sumbit = [
@@ -109,8 +96,8 @@
                         </div>
                     </div>
                     <?php echo form_close(); ?>
+                    <!-- END - CONTENIDO -->
                 </div>
-                <!-- END - CONTENIDO -->
             </div>
         </div>
     </section>

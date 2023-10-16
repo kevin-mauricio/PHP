@@ -25,29 +25,33 @@ class Login extends CI_Controller
 			$data["passw"] = $this->input->post("passw");
 			$respuesta = $this->LoginModel->validar_ingreso($data["correo"]);
 
-			$alert = array(); // Inicializar la variable de alerta}
+			$alerta = array(); // Inicializar la variable de alerta}
 
 			if (!empty($respuesta)) {
 				if ($respuesta->correo === $data['correo'] && $respuesta->passw == $data['passw']) {
 					// Inicio de sesión exitoso
 					$this->session->set_userdata('correo', $data['correo']);
-					redirect("Dashboard/index", "refresh");
+					$alerta = array(
+						'mensaje' => 'Bienvenido(a) ',
+						'color' => 'info'
+					);
+					redirect(base_url('inicio'), "refresh");
 				} else {
 					// Contraseña incorrecta
-					$alert = array(
+					$alerta = array(
 						'mensaje' => 'La contraseña es incorrecta.',
 						'color' => 'warning'
 					);
 				}
 			} else {
 				// El usuario no existe
-				$alert = array(
+				$alerta = array(
 					'mensaje' => 'El usuario no existe.',
 					'color' => 'danger'
 				);
 			}
 
-			$this->session->set_flashdata('alert', $alert);
+			$this->session->set_flashdata('alerta', $alerta);
 		}
 
 		$this->load->view('Login/login');

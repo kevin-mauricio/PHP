@@ -17,6 +17,25 @@ class Dashboard extends CI_Controller
 	public function index()
 	{
 		if (!$this->session->userdata('correo')) {
+			redirect(base_url(), 'refresh');
+		} else {
+			$vdata["usuarios"] = $this->Usuario->selectAllUsuarios();
+
+			$correo = $this->session->userdata('correo');
+			$usuario = $this->Usuario->selectUsuarioByCorreo($correo);
+
+			$this->session->set_userdata('usuario', $usuario);
+
+			// if ($usuario->rol == 'admin') {
+			// 	$this->load->view('Dashboard/listaUsuarios', $vdata);
+			// } else {
+			// }
+			$this->load->view('Dashboard/inicio', $vdata);
+		}
+	}
+	public function consultarUsuarios()
+	{
+		if (!$this->session->userdata('correo')) {
 			redirect('Login/index', 'refresh');
 		} else {
 			$vdata["usuarios"] = $this->Usuario->selectAllUsuarios();
@@ -53,10 +72,12 @@ class Dashboard extends CI_Controller
 					$data["correo"] = $this->input->post("email");
 					$data["rol"] = $this->input->post("rol");
 					$this->Usuario->insert($data);
-					redirect("Dashboard/index", "refresh");
+					$this->crearAlerta('info', 'Usuario creado correctamente.');
+					redirect(base_url('consultar-usuario'), "refresh");
 				}
 				$this->load->view('Dashboard/crear', $vdata);
 			} else {
+				$this->crearAlerta('danger', 'No tienes permisos para esta acción.');
 				$this->load->view('Dashboard/vistaProtegida');
 
 			}
@@ -68,8 +89,16 @@ class Dashboard extends CI_Controller
 
 			redirect('Login/index', 'refresh');
 		} else {
-
+			$this->crearAlerta('danger', 'No tienes permisos para esta acción.');
 			$this->load->view('Dashboard/vistaProtegida');
+		}
+	}
+	public function verPerfil()
+	{
+		if (!$this->session->userdata('correo')) {
+			redirect('Login/index', 'refresh');
+		} else {
+			$this->load->view('Dashboard/perfil');
 		}
 	}
 
@@ -102,13 +131,15 @@ class Dashboard extends CI_Controller
 							$vdata["rol"] = $this->input->post("rol");
 
 							$this->Usuario->updateUsuario($id_usuario, $data);
-							redirect("Dashboard/index", "refresh");
+							$this->crearAlerta('info', 'Usuario modificado correctamente.');
+							redirect(base_url('consultar-usuario'), "refresh");
 						}
 						$this->load->view('Dashboard/modificar', $vdata);
 
 					}
 				}
 			} else {
+				$this->crearAlerta('danger', 'No tienes permisos para esta acción.');
 				$this->load->view('Dashboard/vistaProtegida');
 			}
 		}
@@ -123,25 +154,87 @@ class Dashboard extends CI_Controller
 			$usuario = $this->session->userdata('usuario');
 			if ($usuario->rol == 'admin') {
 				$this->Usuario->deleteUsuario($id_usuario);
+				$this->crearAlerta('info', 'Usuario eliminado correctamente.');
 				redirect(base_url('consultar-usuario'), "refresh");
 			} else {
 				$this->load->view('Dashboard/vistaProtegida');
 			}
 		}
 	}
-	// public function borrar_usuario($id_usuario = null)
-	// {
-	// 	if (!$this->session->userdata('correo')) {
-	// 		redirect('Login/index', 'refresh');
-	// 	} else {
-	// 		$usuario = $this->session->userdata('usuario');
-	// 		if ($usuario->rol == 'admin') {
-	// 			$this->Usuario->deleteUsuario($id_usuario);
-	// 			redirect("Dashboard/index", "refresh");
-	// 		} else {
-	// 			$this->load->view('Dashboard/vistaProtegida');
-	// 		}
-	// 	}
-	// }
 
+	public function actualizarDatos()
+	{
+		if (!$this->session->userdata('correo')) {
+			redirect('Login/index', 'refresh');
+		} else {
+			$usuario = $this->session->userdata('usuario');
+			if (isset($usuario)) {
+				if ($this->input->server("REQUEST_METHOD") == "POST") {
+					$data["nombre"] = $this->input->post("nombre");
+
+					$this->Usuario->updateUsuario($usuario->id_usuario, $data);
+					$this->crearAlerta('success', 'Datos personales actualizados.');
+					redirect(base_url('inicio'), "refresh");
+				}
+				$this->load->view('Dashboard/perfil');
+			}
+		}
+
+	}
+	public function validarContrasena()
+	{
+		if (!$this->session->userdata('correo')) {
+			redirect('Login/index', 'refresh');
+		} else {
+			$usuario = $this->session->userdata('usuario');
+			if (isset($usuario)) {
+				if ($this->input->server("REQUEST_METHOD") == "POST") {
+					$data["pass_old"] = $this->input->post("pass_old");
+					if ($data["pass_old"] == $usuario->passw) {
+						$this->session->set_flashdata('pass_old', $data['pass_old']);
+						$this->crearAlerta('info', 'Ingresa la nueva contraseña.');
+					} else {
+						// codigo si no es correcta la contraseña
+						$this->crearAlerta('warning', 'La contraseña no es correcta');
+					}
+
+				}
+				$this->load->view('Dashboard/perfil');
+			}
+		}
+
+	}
+	public function cambiarContrasena()
+	{
+		if (!$this->session->userdata('correo')) {
+			redirect('Login/index', 'refresh');
+		} else {
+			$usuario = $this->session->userdata('usuario');
+			if (isset($usuario)) {
+				if ($this->input->server("REQUEST_METHOD") == "POST") {
+					$data["pass_new"] = $this->input->post("pass_new");
+					$data["pass_confir"] = $this->input->post("pass_confir");
+					if ($data["pass_new"] == $data["pass_confir"]) {
+						$data_new['passw'] = $data["pass_new"];
+						$this->Usuario->updateUsuario($usuario->id_usuario, $data_new);
+						$this->crearAlerta('success', 'Contraseña actualizada correctamente.');
+						redirect(base_url('inicio'), 'refresh');
+					} else {
+						$this->crearAlerta('warning', 'Las contraseñas no coinciden.');
+					}
+				}
+				$this->load->view('Dashboard/perfil');
+			}
+		}
+
+	}
+
+	public function crearAlerta($color, $mensaje)
+	{
+		$alerta = [
+			'color' => $color,
+			'mensaje' => $mensaje
+		];
+		$this->session->set_flashdata('alerta', $alerta);
+	}
 }

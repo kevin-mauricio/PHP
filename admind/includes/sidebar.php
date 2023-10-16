@@ -20,7 +20,7 @@
                 if (!empty($usuario)) {
                     $nombre_usuario = $usuario->nombre;
                     ?>
-                    <a href="">
+                    <a href="<?php echo base_url('perfil')?>">
                         <h4>
                             <?php echo strtoupper($nombre_usuario); ?>
                         </h4>
