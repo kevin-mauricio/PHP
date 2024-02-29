@@ -1,0 +1,17 @@
+body{
+    background-color: #3A4032;
+}
+
+nav{
+    background-color: #687353;
+}
+
+.logo{
+    max-width: 25%;
+    max-height: 25%;
+    border-radius: 50%;
+}
+
+i{
+    max-width: 100%;
+}
