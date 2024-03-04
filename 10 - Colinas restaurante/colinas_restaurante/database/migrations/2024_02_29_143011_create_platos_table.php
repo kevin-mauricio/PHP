@@ -13,17 +13,14 @@ return new class extends Migration
     {
         Schema::create('platos', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->unsignedBigInteger('categoria_id');
-            $table->foreign('categoria_id')->references('id')->on('categorias');
-        
-            // Grupo de columnas relacionadas con precios
-            $table->float('precio');
-            $table->float('costo');
-        
+            $table->string("nombre_plato", 100);
+            $table->unsignedBigInteger("id_categoria");
+            $table->float("precio");
+            $table->float("costo");
             $table->timestamps();
+
+            $table->foreign('id_categoria')->references('id')->on('categorias');
         });
-        
     }
 
     /**
