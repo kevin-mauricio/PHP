@@ -18,4 +18,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/categories',[CategoriaController::class,'index'])->name('categories');
+Route::get('/categories',[CategoriaController::class,'index'])->name('index_category');
+Route::get('/form-create-category',[CategoriaController::class,'createView'])->name('form_category');
+Route::post('/store-category',[CategoriaController::class,'store'])->name('store_category');

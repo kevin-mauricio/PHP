@@ -16,12 +16,17 @@ class CategoriaController extends Controller
         return view('categories_list', compact('categories'));
     }
 
+    public function createView() {
+        return view('categories_create');
+    }
+
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        Categoria::create($request->all());
+        return redirect()->route('index_category');
     }
 
     /**

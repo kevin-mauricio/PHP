@@ -7,8 +7,13 @@
     <title>Document</title>
 </head>
 <body>
+    <button><a href="{{route('form_category')}}">Create Category</a></button>
     @forelse($categories as $category)
-        <a href="{{route('categories',$category->id)}}">{{$category->nombre_categoria}}</a>
+    <ul>
+        <li>
+            <a href="{{-- {{route('show',$category->id)}} --}}">{{$category->nombre_categoria}}</a>
+        </li>
+    </ul>
     @empty
         <h1>No hay categorias registradas aún</h1>
     @endempty
