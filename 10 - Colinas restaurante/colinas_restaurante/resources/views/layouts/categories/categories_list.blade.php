@@ -1,16 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
+<section id="about" class="about">
     <button><a href="{{route('form_category')}}">Create Category</a></button>
-
-    <table>
-        <thead>
+    <table class="table table-striped">
+        <thead class="thead-dark">
             <tr>
                 <th>NAME</th>
                 <th>EDIT</th>
@@ -21,23 +12,24 @@
             @forelse($categories as $category)
             <tr>
                 <td>
-                    <a href="{{route('show_category',$category->id)}}">{{$category->nombre_categoria}}</a>
+                    <a href="{{ route('show_category', $category->id) }}">{{ $category->nombre_categoria }}</a>
                 </td>
                 <td>
-                    <button><a href="{{route('edit_category',$category->id)}}">EDIT</a></button>
+                    <button class="btn btn-primary"><a href="{{ route('edit_category', $category->id) }}" class="text-white">EDIT</a></button>
                 </td>
                 <td>
-                    <form method="POST" action="{{route('delete_category',$category->id)}}">
+                    <form method="POST" action="{{ route('delete_category', $category->id) }}">
                         @method('DELETE')
                         @csrf
-                        <button type="submit"><a>DELETE</a></button>
+                        <button type="submit" class="btn btn-danger">DELETE</button>
                     </form>
                 </td>
             </tr>
             @empty
-                <h1>No hay categorias registradas aún</h1>
+            <tr>
+                <td colspan="3"><h1>No hay categorías registradas aún</h1></td>
+            </tr>
             @endempty
         </tbody>
     </table>
-</body>
-</html>
+</section>
