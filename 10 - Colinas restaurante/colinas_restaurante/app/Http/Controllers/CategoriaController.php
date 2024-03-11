@@ -35,7 +35,7 @@ class CategoriaController extends Controller
      */
     public function show(Categoria $category)
     {   
-        return view('categories_show', compact('category'));
+        return view('layouts.categories.categories_show', compact('category'));
     }
 
     public function edit(Categoria $category) {

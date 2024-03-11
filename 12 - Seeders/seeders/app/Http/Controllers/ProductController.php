@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Plato;
+use App\Models\Product;
 
-class PlatoController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $platos = Plato::all();
-        return view('view_plate_list', compact('platos'));
+        $products = Product::all();
+        return view('product.index', compact('products'));
     }
 
     /**
