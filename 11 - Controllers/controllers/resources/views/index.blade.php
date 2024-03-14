@@ -28,6 +28,16 @@
                   </tr>
                 </thead>
                 <tbody>
+                    @if($message = Session::get('success'))
+                        <div style="padding: :15px; background-color:green; color:white">
+                            <p>{{$message}}</p>
+                        </div>
+                    @endif
+                    @if($message = Session::get('danger'))
+                        <div style="padding: :15px; background-color:red; color:white">
+                            <p>{{$message}}</p>
+                        </div>
+                    @endif
                     @forelse($notes as $note)
                     <tr>
                         <th scope="row"><a class="nav-link" href="{{route('show',$note->id)}}">{{$note->title}}</a></th>

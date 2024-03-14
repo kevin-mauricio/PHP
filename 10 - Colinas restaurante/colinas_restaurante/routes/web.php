@@ -23,6 +23,7 @@ use App\Http\Controllers\IndexController;
 /* IndexController */
 Route::get('/',[IndexController::class,'index'])->name('index');
 
+/* CategoriaController */
 Route::get('/categories',[CategoriaController::class,'index'])->name('index_category');
 Route::get('/form-create-category',[CategoriaController::class,'createView'])->name('form_category');
 Route::post('/store-category',[CategoriaController::class,'store'])->name('store_category');

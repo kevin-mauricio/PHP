@@ -14,16 +14,20 @@
                         <div class="col-auto">
                             <input type="text" name="nombre_categoria" class="form-control" id="nombre_categoria"
                                 placeholder="Category name">
+                                @error('nombre_categoria')
+                                <div class="alert alert-danger m-3">{{ $message }}</div>
+                                @enderror
                             <div class="validate"></div>
                         </div>
                         <div class="col-auto">
                             <input type="text" name="descripcion_categoria" class="form-control"
                                 id="descripcion_categoria" placeholder="Category description">
+                                @error('descripcion_categoria')
+                                <div class="alert alert-danger m-3">{{ $message }}</div>
+                                @enderror
                             <div class="validate"></div>
                         </div>
-                        @error('nombre_categoria')
-                            <div class="alert alert-danger m-3 w-25">{{ $message }}</div>
-                        @enderror
+
                         <div class="text-center m-3"><button type="submit" class="btn btn-danger w-25">Create</button>
                         </div>
                     </div>

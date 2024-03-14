@@ -11,8 +11,14 @@
         @csrf {{-- directiva para enviar la información --}}
         <label>Title:</label>
         <input type="text" name="title">
+        @error('title')
+            <p style="color:red">{{$message}}</p>
+        @enderror
         <label>Description:</label>
         <input type="text" name="description">
+        @error('description')
+        <p style="color:red">{{$message}}</p>
+        @enderror
         
         <input type="submit" value="create">
     </form>

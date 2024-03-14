@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Categoria;
+use App\Http\Requests\CategoriaRequest;
 
 class CategoriaController extends Controller
 {
@@ -24,18 +25,12 @@ class CategoriaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CategoriaRequest $request)
     {
-        $request->validate([
-            'nombre_categoria' => 'required',
-            'nombre_categoria' => 'required',
-        ], [
-            'nombre_categoria.required' => 'All fields are required.',
-            'nombre_categoria.required' => 'All fields are required.',
-        ]);
-
         Categoria::create($request->all());
-        return redirect()->route('index_category');
+        return redirect()->route('index_category')->with([
+            'alert' => ['color' => 'success', 'message' => 'Category created']
+        ]);
     }
 
     /**
@@ -43,7 +38,7 @@ class CategoriaController extends Controller
      */
     public function show(Categoria $category)
     {   
-        return view('layouts.categories.categories_show', compact('category'));
+        return view('view_category_show', compact('category'));
     }
 
     public function edit(Categoria $category) {
@@ -53,10 +48,12 @@ class CategoriaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Categoria $category)
+    public function update(CategoriaRequest $request, Categoria $category)
     {   
         $category->update($request->all());
-        return redirect()->route('index_category');
+        return redirect()->route('index_category')->with([
+            'alert' => ['color' => 'warning', 'message' => 'Category updated']
+        ]);
     }
 
     /**
@@ -65,7 +62,9 @@ class CategoriaController extends Controller
     public function destroy(Request $request, Categoria $category)
     {
         $category->delete();
-        return redirect()->route('index_category');
+        return redirect()->route('index_category')->with([
+            'alert' => ['color' => 'danger', 'message' => 'Category deleted']
+        ]);
     }
 
 }

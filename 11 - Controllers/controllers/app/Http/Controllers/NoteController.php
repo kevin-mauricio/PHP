@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Note;
+use App\Http\Requests\NoteRequest;
 
 class NoteController extends Controller
 {
@@ -23,10 +24,10 @@ class NoteController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(NoteRequest $request) 
     {
         Note::create($request->all()); //genera el insert en base de datos
-        return redirect()->route('index');
+        return redirect()->route('index')->with('success', 'Nota creada');
     }
 
     public function edit(Note $note)
@@ -46,10 +47,10 @@ class NoteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Note $note)
+    public function update(NoteRequest $request, Note $note)
     {
         $note->update($request->all());
-        return redirect()->route('index');
+        return redirect()->route('index')->with('warning', 'Nota actualizada');
     }
 
     /**
@@ -58,6 +59,6 @@ class NoteController extends Controller
     public function destroy(Request $request, Note $note)
     {
         $note->delete();
-        return redirect()->route('index');
+        return redirect()->route('index')->with('danger', 'Nota eliminada');
     }
 }
