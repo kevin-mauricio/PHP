@@ -1,21 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Editing category</h1>
-    <form method="POST" action="{{route('update_category',$category->id)}}">
-        @method('put')
-        @csrf
-        <label>name</label>
-        <input type="text" name="nombre_categoria" value="{{$category->nombre_categoria}}">
-        <label>description</label>
-        <input type="text" name="descripcion_categoria" value="{{$category->descripcion_categoria}}">
-        <input type="submit" value="UPDATE">
-    </form>
-</body>
-</html>
+<section id="book-a-table" class="book-a-table">
+    <div class="container" data-aos="fade-up">
+        <div class="row g-0">
+
+            <div class="col-lg-4 reservation-img" style="background-image: url(assets/img/reservation.jpg);"
+                data-aos="zoom-out" data-aos-delay="200"></div>
+
+            <div class="col-lg-8 d-flex align-items-center reservation-form-bg">
+                <form method="POST" action="{{ route('update_category', $category->id) }}" role="form"
+                    class=" w-100 justify-content-center" data-aos="fade-up" data-aos-delay="100">
+                    @method('put')
+
+                    @csrf {{-- directiva para enviar la información --}}
+                    <div class="row gy-4 d-flex justify-content-center">
+                        <div class="col-auto">
+                            <input type="text" name="nombre_categoria" class="form-control" id="nombre_categoria"
+                                placeholder="Category name" value="{{ $category->nombre_categoria }}">
+                            <div class="validate"></div>
+                        </div>
+                        <div class="col-auto">
+                            <input type="text" name="descripcion_categoria" class="form-control"
+                                id="descripcion_categoria" placeholder="Category description"
+                                value="{{ $category->descripcion_categoria }}">
+                            <div class="validate"></div>
+                        </div>
+                        @error('nombre_categoria')
+                            <div class="alert alert-danger m-3 w-25">{{ $message }}</div>
+                        @enderror
+                        <div class="text-center m-3"><button type="submit" class="btn btn-danger w-25">Update</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div><!-- End Reservation Form -->
+
+        </div>
+
+    </div>

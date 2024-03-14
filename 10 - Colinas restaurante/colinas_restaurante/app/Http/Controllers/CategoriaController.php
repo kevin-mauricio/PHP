@@ -18,7 +18,7 @@ class CategoriaController extends Controller
     }
 
     public function createView() {
-        return view('layouts.categories.categories_create');
+        return view('view_category_create');
     }
 
     /**
@@ -26,6 +26,14 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nombre_categoria' => 'required',
+            'nombre_categoria' => 'required',
+        ], [
+            'nombre_categoria.required' => 'All fields are required.',
+            'nombre_categoria.required' => 'All fields are required.',
+        ]);
+
         Categoria::create($request->all());
         return redirect()->route('index_category');
     }
@@ -39,7 +47,7 @@ class CategoriaController extends Controller
     }
 
     public function edit(Categoria $category) {
-        return view('categories_edit', compact('category'));
+        return view('view_category_edit', compact('category'));
     }
 
     /**
@@ -59,4 +67,5 @@ class CategoriaController extends Controller
         $category->delete();
         return redirect()->route('index_category');
     }
+
 }

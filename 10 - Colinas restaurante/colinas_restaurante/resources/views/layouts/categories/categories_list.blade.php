@@ -1,40 +1,51 @@
-<section id=" -us" class="why-us section-bg">
-    <div class="container" data-aos="fade-up">
-
-      <div class="row d-flex justify-content-center gy-4">
-        <div class="col-lg-8 d-flex align-items-center">
-          <div class="row gy-4">
-            @forelse($categories as $category)
-            <div class="col-xl-4" data-aos="fade-up" data-aos-delay="200">
-                <div class="icon-box d-flex flex-column justify-content-center align-items-center shadow rounded-3">
-                  <i class="bi bi-clipboard-data"></i>
-                  <h4>
-                      <a class="text-dark" href="{{ route('show_category', $category->id) }}">{{ $category->nombre_categoria }}</a>
-                  </h4>
-                  <div class="row g-2">
-                    <div class="col-auto">
-                        <button class="btn btn-primary"><a href="{{ route('edit_category', $category->id) }}" class="text-white">EDIT</a></button>
-                    </div>
-                    <div class="col-auto">
-                        <form method="POST" action="{{ route('delete_category', $category->id) }}">
-                            @method('DELETE')
-                            @csrf
-                            <button type="submit" class="btn btn-light">DELETE</button>
-                        </form>
-                    </div>
-                  </div>
-
-                </div>
-              </div><!-- End Icon Box -->
-            @empty
-                
-            @endforelse
-
-
-          </div>
+<section id="why-us" class="why-us section-bg">
+  <div class="container" data-aos="fade-up">
+    <div class="row gy-4 p-5 text-center">
+      <div class="row">
+        <div class="col d-flex justify-content-end p-3">
+          <button class="btn btn-dark">
+            <a class="text-white" href="{{route('form_category')}}">Create category</a>
+          </button>
         </div>
-
-      </div>
-
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Category</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          @forelse($categories as $category)
+          <tr>
+            <th scope="row">
+              <a class="text-dark" href="{{ route('show_category', $category->id) }}">{{ $category->nombre_categoria }}</a>
+            </th>
+            <td>
+              <button class="btn btn-dark"><a href="{{ route('edit_category', $category->id) }}" class="text-white">EDIT</a></button>
+            </td>
+            <td>
+              <form method="POST" action="{{ route('delete_category', $category->id) }}">
+                @method('DELETE')
+                @csrf
+                <button type="submit" class="btn btn-light">DELETE</button>
+            </form>
+            </td>
+          </tr>
+          @empty
+          <tr>
+            <th scope="row">
+              There are not categories
+            </th>
+            <td></td>
+            <td></td>
+          </tr>
+          @endforelse
+        </tbody>
+      </table>
+     </div>
     </div>
-  </section><!-- End Why Us Section -->
+  </div>
+</section><!-- End Why Us Section -->
+
+
