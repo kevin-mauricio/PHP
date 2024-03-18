@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("nombre_plato", 100);
             $table->unsignedBigInteger("id_categoria");
+            $table->string('descripcion');
             $table->float("precio");
             $table->float("costo");
             $table->timestamps();

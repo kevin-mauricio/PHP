@@ -28,8 +28,11 @@
 <body>
     <main id="main p-5">
     @include('layouts.partials.menu')
-    @yield('content')
-      <!-- Vendor JS Files -->
+    <div class="container mt-5">
+      @yield('content')
+        <!-- Vendor JS Files -->
+      @include('layouts.partials.footer')
+    </div>
     </main>
   <script src="{{asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
   <script src="{{asset('assets/vendor/aos/aos.js')}}"></script>

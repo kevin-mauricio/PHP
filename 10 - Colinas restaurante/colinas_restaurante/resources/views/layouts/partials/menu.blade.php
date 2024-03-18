@@ -12,7 +12,7 @@
         <ul>
           <li><a href="{{route('index')}}">Home</a></li>
           <li><a href="{{route('index_category')}}">Categories</a></li>
-          <li><a href="#menu">Menu</a></li>
+          <li><a href="{{route('index_plate')}}">Menu</a></li>
           <li><a href="#events">Events</a></li>
           <li><a href="#chefs">Chefs</a></li>
           <li><a href="#gallery">Gallery</a></li>
