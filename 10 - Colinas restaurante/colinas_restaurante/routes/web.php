@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\PlatoController;
 
 
 /*
@@ -31,3 +32,9 @@ Route::get('/show-category/{category}',[CategoriaController::class,'show'])->nam
 Route::get('/edit-category/{category}',[CategoriaController::class,'edit'])->name('edit_category');
 Route::put('/update-category/{category}',[CategoriaController::class,'update'])->name('update_category');
 Route::delete('delete-category/{category}',[CategoriaController::class,'destroy'])->name('delete_category');
+
+/* PlatoController */
+Route::get('/plates', [PlatoController::class, 'index'])->name('index_plate');
+Route::get('/form-create-plate', [PlatoController::class, 'createView'])->name('form_plate');
+Route::post('/store-plate', [PlatoController::class, 'store'])->name('store_plate');
+Route::get('/plates-by-category/{id_category}', [PlatoController::class, 'getPlateByCategory'])->name('plate_by_category');
