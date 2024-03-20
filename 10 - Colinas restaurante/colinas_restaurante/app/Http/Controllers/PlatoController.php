@@ -16,13 +16,15 @@ class PlatoController extends Controller
     {
         $plates = Plato::all();
         $categories = Categoria::all();
-        return view('view_plate_list', compact('plates', 'categories'));
+        $status_all = 'active';
+        return view('view_plate_list', compact('plates', 'categories', 'status_all'));
     }
 
 public function getPlateByCategory(int $id_category) {
     $plates = Plato::where('id_categoria', $id_category)->get();
     $categories = Categoria::all();
-    return view('view_plate_list', compact('plates', 'categories'));
+    $status = 'active';
+    return view('view_plate_list', compact('plates', 'categories', 'status', 'id_category'));
 }
 
 

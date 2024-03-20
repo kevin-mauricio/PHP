@@ -69,7 +69,7 @@
               Are you sure?
           </div>
           <div class="modal-footer">
-              @if(!empty($categoryToDelete))
+              @if(isset($categoryToDelete))
                   <form method="POST" action="{{ route('delete_category', $categoryToDelete->id) }}">
                       @method('DELETE')
                       @csrf

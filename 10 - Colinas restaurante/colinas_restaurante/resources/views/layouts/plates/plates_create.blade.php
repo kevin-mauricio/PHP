@@ -13,7 +13,7 @@
                     data-aos="zoom-out" data-aos-delay="200"></div>
 
                 <div class="col-lg-8 d-flex align-items-center reservation-form-bg">
-                    <form action="{{route('store_plate')}}" method="POST" role="form" class="" data-aos="fade-up"
+                    <form action="{{route('store_plate')}}" method="POST" role="form" class="php-email-form p-5" data-aos="fade-up"
                         data-aos-delay="100">
                         @csrf
                         <div class="row gy-4">
@@ -43,10 +43,9 @@
                                     @empty
                                     <option value="null">No categories added</option>
                                     @endforelse
-
                                 </select>
                             </div>
-                            <div class="text-center"><button type="submit">Add</button></div>
+                            <div class="text-center"><button class="" type="submit">Add</button></div>
                     </form>
                 </div><!-- End Reservation Form -->
 
