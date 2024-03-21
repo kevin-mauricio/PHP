@@ -26,7 +26,7 @@
     </title>
 </head>
 <body>
-    <main id="main p-5">
+    <main id="main pt-5">
     @include('layouts.partials.menu')
     <div class="container mt-5">
       @yield('content')

@@ -38,3 +38,4 @@ Route::get('/plates', [PlatoController::class, 'index'])->name('index_plate');
 Route::get('/form-create-plate', [PlatoController::class, 'createView'])->name('form_plate');
 Route::post('/store-plate', [PlatoController::class, 'store'])->name('store_plate');
 Route::get('/plates-by-category/{id_category}', [PlatoController::class, 'getPlateByCategory'])->name('plate_by_category');
+Route::put('/update-plate/{plate}', [PlateController::class, 'update'])->name('update_plate');

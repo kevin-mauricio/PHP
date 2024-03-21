@@ -10,6 +10,14 @@
             <h2>Our Menu</h2>
             <p>Check Our <span>Colinas Menu</span></p>
           </div>
+
+          <div class="row text-center">
+            @if($alert = Session::get('alert'))
+            <div class="alert alert-{{$alert['color']}}" role="alert">
+              {{$alert['message']}}
+            </div>  
+            @endif
+          </div>
           
           @if($categories->isNotEmpty())
           <ul class="nav nav-tabs d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">
@@ -48,9 +56,10 @@
                   <p>{{$category->nombre_categoria}}</p>
                 </div>
     
-                <div class="row gy-5">
+                <div class="row p-auto">
                   @forelse ($plates as $plate)
-                  <div class="col-lg-4 menu-item">
+                  <div class="col-lg-3 menu-item rounded-2">
+                      <button class="btn mt-2"><a href="" class="text-black"><i class="bi bi-pencil-square"></i></a></button>
                       <a href="assets/img/menu/menu-item-1.png" class="glightbox"><img src="{{asset('assets/img/menu/menu-item-1.png')}}" class="menu-img img-fluid" alt=""></a>
                       <h4>{{ $plate->nombre_plato }}</h4>
                       <p class="ingredients">

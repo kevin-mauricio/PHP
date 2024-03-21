@@ -3,9 +3,9 @@
   <div class="container" data-aos="fade-up">
     <div class="row gy-4 p-5 text-center">
       <div class="row">
-        @if($message = Session::get('alert'))
-        <div class="alert alert-{{$message['color']}}" role="alert">
-          {{$message['message']}}
+        @if($alert = Session::get('alert'))
+        <div class="alert alert-{{$alert['color']}}" role="alert">
+          {{$alert['message']}}
         </div>  
         @endif
       </div>
@@ -34,7 +34,7 @@
                 <button class="btn btn-light"><a href="{{ route('edit_category', $category->id) }}" class="text-dark"><i class="bi bi-pencil-square"></i></a></button>
               </td>
               <td>
-                  <button type="submit" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#idModalDelete"><i class="bi bi-trash"></i></button>
+                  <button onclick="" type="submit" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#idModalDelete"><i class="bi bi-trash"></i></button>
               </td>
             </tr>
             @empty
@@ -69,25 +69,18 @@
               Are you sure?
           </div>
           <div class="modal-footer">
-              @if(isset($categoryToDelete))
-                  <form method="POST" action="{{ route('delete_category', $categoryToDelete->id) }}">
+                  <form method="POST" action="{{ route('delete_category', $category->id) }}">
                       @method('DELETE')
                       @csrf
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
                       <button type="submit" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal">Yes</button>
                   </form>
-              @endif
           </div>
       </div>
   </div>
 </div>
 
-<!-- Antes del bucle, almacena la categoría a eliminar si es necesario -->
-@empty($categories)
-  @php
-      $categoryToDelete = null;
-  @endphp
-@endempty
+
 
 
 

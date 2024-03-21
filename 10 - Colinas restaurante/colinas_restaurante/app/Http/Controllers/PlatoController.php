@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Plato;
 use App\Models\Categoria;
+use App\Http\Requests\PlatoRequest;
+
 
 class PlatoController extends Controller
 {
@@ -37,10 +39,15 @@ public function getPlateByCategory(int $id_category) {
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PlatoRequest $request)
     {
         Plato::create($request->all()); 
-        return redirect()->route('index_plate'); // pending validation
+        return redirect()->route('index_plate')->with([
+            'alert' => [
+                'color' => 'success',
+                'message' => 'Plate created'
+            ]
+        ]);
     }
 
     /**
@@ -54,9 +61,16 @@ public function getPlateByCategory(int $id_category) {
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+
+     public function edit(Plato $plate)
+     {
+        return view('view_plate_edit', compact('plate'));
+     }
+
+    public function update(PlatoRequest $request, Plato $plate)
     {
-        //
+        $plate->update($request->all());
+        return redirect()->route('index_plate');
     }
 
     /**
