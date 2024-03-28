@@ -22,12 +22,13 @@ class PlatoController extends Controller
         return view('view_plate_list', compact('plates', 'categories', 'status_all'));
     }
 
-public function getPlateByCategory(int $id_category) {
-    $plates = Plato::where('id_categoria', $id_category)->get();
-    $categories = Categoria::all();
-    $status = 'active';
-    return view('view_plate_list', compact('plates', 'categories', 'status', 'id_category'));
-}
+    public function getPlateByCategory(int $id_category)
+    {
+        $plates = Plato::where('id_categoria', $id_category)->get();
+        $categories = Categoria::all();
+        $status = 'active';
+        return view('view_plate_list', compact('plates', 'categories', 'status', 'id_category'));
+    }
 
 
     public function createView()
@@ -41,7 +42,7 @@ public function getPlateByCategory(int $id_category) {
      */
     public function store(PlatoRequest $request)
     {
-        Plato::create($request->all()); 
+        Plato::create($request->all());
         return redirect()->route('index_plate')->with([
             'alert' => [
                 'color' => 'success',
@@ -62,22 +63,34 @@ public function getPlateByCategory(int $id_category) {
      * Update the specified resource in storage.
      */
 
-     public function edit(Plato $plate)
-     {
-        return view('view_plate_edit', compact('plate'));
-     }
+    public function edit(Plato $plate)
+    {
+        $categories = Categoria::all();
+        return view('view_plate_edit', compact('plate', 'categories'));
+    }
 
     public function update(PlatoRequest $request, Plato $plate)
     {
         $plate->update($request->all());
-        return redirect()->route('index_plate');
+        return redirect()->route('index_plate')->with([
+            'alert' => [
+                'color' => 'warning',
+                'message' => 'Plate updated'
+            ]
+        ]); //alert
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Plato $plate)
     {
-        //
+        $plate->delete();
+        return redirect()->route('index_plate')->with([
+            'alert' => [
+                'color' => 'danger',
+                'message' => 'Plate deleted'
+            ]
+        ]); // alert
     }
 }

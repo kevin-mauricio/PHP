@@ -24,7 +24,7 @@ class PlatoRequest extends FormRequest
     {
         return [
             'nombre_plato' => 'required|min:4',
-            'descripcion' => 'required|min:5|max:30',
+            'descripcion' => 'required|min:5|max:60',
             'precio' => 'required|numeric|min:0',
             'costo' => 'required|numeric|min:0',
             'id_categoria' => [

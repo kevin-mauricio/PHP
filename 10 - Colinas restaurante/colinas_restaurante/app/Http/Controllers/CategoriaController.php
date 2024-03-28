@@ -18,7 +18,8 @@ class CategoriaController extends Controller
         return view('view_category_list', compact('categories'));
     }
 
-    public function createView() {
+    public function createView()
+    {
         return view('view_category_create');
     }
 
@@ -37,11 +38,12 @@ class CategoriaController extends Controller
      * Display the specified resource.
      */
     public function show(Categoria $category)
-    {   
+    {
         return view('view_category_show', compact('category'));
     }
 
-    public function edit(Categoria $category) {
+    public function edit(Categoria $category)
+    {
         return view('view_category_edit', compact('category'));
     }
 
@@ -49,7 +51,7 @@ class CategoriaController extends Controller
      * Update the specified resource in storage.
      */
     public function update(CategoriaRequest $request, Categoria $category)
-    {   
+    {
         $category->update($request->all());
         return redirect()->route('index_category')->with([
             'alert' => ['color' => 'warning', 'message' => 'Category updated']
@@ -66,5 +68,4 @@ class CategoriaController extends Controller
             'alert' => ['color' => 'danger', 'message' => 'Category deleted']
         ]);
     }
-
 }
